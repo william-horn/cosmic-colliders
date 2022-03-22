@@ -43,6 +43,25 @@ Coming soon
 /* ---------------- */
 /* Import Libraries */
 /* ---------------- */
+import debouncer from "./libs/debounce-1.0.0.js";
+
+// ! TESTING CODE, REMOVE LATER 
+// This is just here to test the libraries and make sure they're running smoothly
+
+function test() {
+    console.log("function code running")
+    // this.open();
+    // debouncer.getDebounceData(test).open();
+    debounceData.open();
+}
+
+const debouncedFunction = debouncer.debounce(test);
+const debounceData = debouncer.getDebounceData(test);
+debouncedFunction(); // initial run
+
+debounceData.setStateTimeout("open", 5000);
+setInterval(() => debouncedFunction(), 1000);
+setTimeout(() => debounceData.open(), 8000);
 
 /* ------------------------- */
 /* Global Element References */

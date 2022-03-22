@@ -35,10 +35,7 @@ Coming soon
 | DOCUMENT TODO |
 ==================================================================================================================================
 
--   Add support for jQuery --DONE
--   Add pause/resume functionality to events --DONE
--   Generalize the retrieval of data from a map/array (maybe as a new utility for gutil?) with a callback
--   Debating use of classes for main EventHandler module
+!-  Currently re-writing entire library. NOT ready for functional use.
 
 ==================================================================================================================================
 */
@@ -158,7 +155,4 @@ export default class EventHandler extends Listener {
         this.config("pause", ...args);
     }
 
-    // remove(...args) {
-    //     this.config("remove", ...args);
-    // }
 }

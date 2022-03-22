@@ -51,7 +51,7 @@ Event.factoryConnect("click", () => {})     // cannot disconnect once set
 Event.factoryConnect(() => {})              // cannot disconnect once set
 */
 
-import DynamicState from "./dystates-1.0.0.js";
+import DynamicState from "./dynamicstate-1.0.0.js";
 
 const connectionStates = {
     "factory": "factory", // immutable event (cannot disconnect)
