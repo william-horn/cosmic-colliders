@@ -1,0 +1,175 @@
+? @document-start
+=====================
+| CHANGE LOG SYSTEM |
+==================================================================================================================================
+
+? @author:                 William J. Horn
+? @document-name:          changelog.txt
+? @document-created:       02/19/2022
+? @document-modified:      03/02/2022
+
+==================================================================================================================================
+
+! This is the central updated version
+
+? @document-info
+====================
+| ABOUT CHANGE LOG |
+==================================================================================================================================
+
+-- What Is This? --
+
+This change log system was developed to help keep track of changes made to a program file for independent or collaborative work. 
+The goal was to reduce comment clutter in a program file while still keeping a descriptive log of changes made TO that program 
+file stored away in a different file. There are no new technologies associated with this system, it is simply an organizational 
+tool using folders, txt files with information, and your text editor's search function.
+
+*   This specific system was developed with VSCode's search feature (and others like it) in mind.
+
+*   The intention of this system is not to replace commenting your code, but just to store and link verbose comments within
+    a different file.
+
+
+-- How Do I Use This? --
+
+Recording a change made to a document (using this system) is done by creating a "change record". A change record is a plain-text
+entry within the local changelog file. Each directory containing a program file that wishes to keep a changelog will have a 
+folder called "changelog" inside of it. Inside this folder are text files that are named after the program file it is tracking. 
+So, if a program file is named "index.html", then its changelog file will be named "index.html.txt" which is inside 
+of the changelog folder. The hierarchy will look something like this:
+
+
+    <Program File Directory>
+        |
+        |__program-file.html 
+        |
+        |__changelog
+            |
+            |__program-file.html.txt
+
+
+There will only be one changelog folder per directory. Tracking another program file does not require creating another changelog 
+folder.
+
+Once the files are established you can start making change records. As mentioned before, change records are just text entries
+to the changelog files. However, they follow a specific format. They are instantiated by writing:
+
+
+    @changelog-record:log[id.version]
+        -   some description about the change here
+
+
+Here is the above example broken down:
+
+
+    '@changelog-record:log'         - an anchor tag that let's us know we're creating a new change record in the changelog txt file
+    'id.version'                    - the numeric id of the change followed by it's version (a sub-change, or modification to a change)
+
+
+Here is an example of how some change records might look within the context of a project. This is what the content inside the 
+changelog files will look like:
+
+======================
+| CHANGE LOG RECORDS |
+==================================================================================================================================
+
+    ============================
+    | @changelog-version:0.0.0 |
+    ============================
+
+        ---------------------------------------------------------------------------------------------------------------------------
+                                                                                                     | @changelog-date:xx/xx/xxxx |
+                                                                                                     ------------------------------
+        @changelog-record:log[1.0]
+            -   changed header of website from X to Y 
+            -   updated color scheme
+
+            @changelog-record:log[1.1]
+                -   reverted to old color scheme
+
+
+        @changelog-record:log[2.0]
+            -   changed footer of website from X to Y
+
+        *OTHER:
+            - general change #1
+            - general change #2
+
+        *TODO:
+            - do this
+            - and that
+
+        ---------------------------------------------------------------------------------------------------------------------------
+
+
+==================================================================================================================================
+
+-- Sort by Version [Added: 02/26/2022] --
+
+Changelog records are now ALSO sorted by version number of the linked program file. For example, if your program file has 
+updated through versions 1.0.0, 1.0.1, and 1.0.2, the changes made to the program during these versions should be recorded 
+within the changelog file along with the name of the version number they occurred during. Search for '@changelog-version' to 
+list all of the version numbers of your program file along with their respective file edits. 
+
+
+-- Sort by Date --
+
+All of these change records WITHIN a version category are grouped and sorted by date. The date is displayed at the far right 
+of the delimiter lines.
+
+Notice that the date is prefixed with the anchor tag '@changelog-date:`, this means you can also search for groups of change
+records by date. You will also notice there is an 'OTHER:' and 'TODO:' list below the change records. These lists are optional 
+and should not be visible by default. They exist to write down changes you made that aren't worth creating a change record for.
+Think of "OTHER" and "TODO" as sticky notes.
+
+
+-- Nesting Change Records -- 
+
+If you record a change and later make minor adjustments to that change, you can nest changelog records within each other by 
+indenting and writing the new record. This new record's id should stay the same, whereas the second number (the version number)
+should be incremented by one. For example, '@changelog-record:log[1.1]` is written below `@changelog-record:log[1.0]` and is 
+indented.
+
+
+-- Using Change Records in Your Program File --
+
+All of the information above is just for creating a change record directly in the changelog folder, completely hidden away from 
+the main program file. However, you may also write these change record comments within your program file if the change you made 
+affects a block of code that you want to track. This is optional, but encouraged when refactoring your own code or working with
+other developers.
+
+You can do this by enclosing a block of code within the '@changelog-record:start[id.version]` and 
+'@changelog-record:end[id.version]' anchor tags as a comment. For example:
+
+
+    ----
+    CODE IN PROGRAM FILE: 
+    ----
+
+    var x = 0
+
+    /* @changelog-record:start[1.0] */          <----
+    while (x < 10) {
+        x+=2;
+    }
+    /* @changelog-record:end[1.0] */            <----
+
+    ----
+
+
+Not every change in a program file warrants documenting a change record, but there are a few benefits to doing so:
+
+
+    1.  Searching for change records with your text editor's search function will now also show you where in the program 
+        file the change was made, in addition to locating the information about the change in the changelog file.
+    
+    2.  While you're in your program file you will be able to see what code you changed without needing to switch
+        immediately to your changelog file.
+
+
+That's all for now!
+
+==================================================================================================================================
+
+~Will
+? @document-end

@@ -1,0 +1,29 @@
+? @document-start
+==================
+| ABOUT VERSIONS |
+==================================================================================================================================
+
+? @author:                 William J. Horn
+? @document-name:          versions.txt
+? @document-created:       02/22/2022
+? @document-modified:      02/26/2022
+
+==================================================================================================================================
+
+! This is the central updated version
+
+? @document-info
+=================================
+| What do Version Numbers Mean? |
+==================================================================================================================================
+
+All version numbers (formatted as: v.a.b.c) follow the rule:
+
+    a = major update (significant change in aesthetic, behavior, compatibility, concept, or other).
+    b = minor update (new minor features or capabilities are introduced)
+    c = patch (bug fixes, or reworking of previous subpar behaviors)
+
+==================================================================================================================================
+
+~Will
+? @document-end
