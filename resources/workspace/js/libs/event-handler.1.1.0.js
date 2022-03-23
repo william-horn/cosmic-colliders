@@ -47,29 +47,6 @@ import DynamicState from "./dynamicstate-1.0.0.js";
 const eventConnectorName = window.jQuery ? "on" : "addEventListener";
 const eventDisconnectorName = window.jQuery ? "off" : "removeEventListener";
 
-const eventHandlerStates = {
-    "listening": "listening",
-    "paused": "paused"
-}
-
-class Listener extends DynamicState {
-    constructor(data) {
-        super(eventHandlerStates);
-        this.className = "Listener";
-        this.setState("listening");
-
-        this.name = data.name; // arbitrary, optional event name alias
-        this.type = data.type; // name of the event type
-        this.objRef = data.objRef; // actual reference to the object
-        this.callback = data.callback; // callback function given by the developer
-        this.handler = data.handler // handler function that wraps the callback function
-
-        this.parentEvent = data ? data.parent : undefined;
-        this.childEvents = [];
-        this.connections = [];
-    }  
-}
-
 export default class EventHandler extends Listener {
     constructor() {
         super({});

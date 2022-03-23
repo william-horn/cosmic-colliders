@@ -176,17 +176,22 @@ export class PseudoEvent extends DynamicState {
     applyFilter(connectionName, connectionFunc, override, action) {
         const typeof_connectionName = typeof connectionName;
         const typeof_connectionFunc = typeof connectionFunc;
+
+        const isFunc_connectionFunc = typeof_connectionFunc === "function";
+        const isObj_connectionName = typeof_connectionName === "object";
+        const isStr_connectionName = typeof_connectionName === "string";
+
         const connections = this.connections;
 
         // arrange arguments to their intended values
         // todo: there's probably a better, more generalized way to do this. think of it later.
         // @note maybe use arrays to sort by type?
         [connectionName, connectionFunc, override] = [
-            typeof_connectionName === "function"
+            isFunc_connectionFunc
             ? undefined : connectionName,
 
-            typeof_connectionName === "function"
-            ? connectionName : typeof_connectionFunc === "function"
+            isFunc_connectionFunc
+            ? connectionName : isFunc_connectionFunc
             ? connectionFunc : undefined,
 
             connectionFunc === true 
@@ -206,17 +211,6 @@ export class PseudoEvent extends DynamicState {
         // applyFilter("eventName", f)           =>      "eventName",    f,              undefined
         // applyFilter(f)                        =>      undefined,      f,              undefined
 
-        // Connection literal => [Connection]
-        // fastest option
-        if (typeof_connectionName === "object" && connectionName.isMutable(override)) {
-            for (let i = 0; i < connections.length; i++) {
-                if (connections[i] === connectionName) {
-                    connections.splice(i, 1);
-                    return;
-                }
-            }
-        }
-
         // return filtered-out array of connections by name/function
         // return gutil.getAllOf(this.connections, val => {
         //     return val.isMutable(override)
@@ -224,12 +218,14 @@ export class PseudoEvent extends DynamicState {
         //         && (connectionFunc ? val.source === connectionFunc : true)
         // });
 
+        // * connectionName can be a string OR an object
         gutil.generalIteration(
             connections,
             val => {
                 return val.isMutable(override)
-                    && (connectionName ? val.name === connectionName : true)
+                    && (isStr_connectionName ? val.name === connectionName : true)
                     && (connectionFunc ? val.source === connectionFunc : true)
+                    && (isObj_connectionName ? (connectionName === val) : true)
             },
             result => result, 
             key => action.call(this, key)
@@ -255,7 +251,7 @@ export class PseudoEvent extends DynamicState {
 
         for (let i = 0; i < connections.length; i++) {
             const connection = connections[i];
-            connections[i].source(...args);
+            if (connection.isState("listening")) connection.source(...args);
         }
     }
 

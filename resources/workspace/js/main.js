@@ -51,21 +51,24 @@ import { PseudoEvent, Connection } from "./libs/pseudo-events-2.1.0.js";
 
 // event testing
 
-const grandparentEvent = new PseudoEvent();
-const parentEvent = new PseudoEvent(grandparentEvent);
-const childEvent = new PseudoEvent(parentEvent);
+const EventHandler = new PseudoEvent();
+const clickEvent = new PseudoEvent(EventHandler);
+const hoverEvent = new PseudoEvent(EventHandler);
 
-const f_0 = () => console.log("fired 1!")
-
-
-const conn = childEvent.strongConnect(f_0);
-childEvent.disconnect(conn);
-
-childEvent.fire();
-
-console.log(childEvent);
+const f_0 = arg => console.log("event 0 fired with arg:", arg);
+const f_1 = arg => console.log("event 1 fired with arg:", arg);
+const f_2 = arg => console.log("event 2 fired with arg:", arg);
 
 
+// EventHandler.add("click", "name", object, f_0);
+// make 'eventClick'
+clickEvent.connect(f_0);
+
+// EventHandler.remove("click", "name", f_0)
+
+
+// EventHandler.add("hover", object, f_1);
+hoverEvent.connect(f_1);
 
 /* ------------------------- */
 /* Global Element References */
