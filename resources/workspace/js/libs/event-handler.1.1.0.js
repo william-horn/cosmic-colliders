@@ -47,9 +47,8 @@ import DynamicState from "./dynamicstate-1.0.0.js";
 const eventConnectorName = window.jQuery ? "on" : "addEventListener";
 const eventDisconnectorName = window.jQuery ? "off" : "removeEventListener";
 
-export default class EventHandler extends Listener {
+export default class EventHandler {
     constructor() {
-        super({});
         this.className = "EventHandler";
 
         /* 
@@ -65,48 +64,6 @@ export default class EventHandler extends Listener {
 
             this.parentEvent = none;
         */
-    }
-
-    getListenersWithFilter(eventType, eventName, guiObject) {
-        [eventType, eventName, guiObject] = [
-            eventType,
-            typeof eventName === "object" ? null : eventName,
-            typeof eventName === "string" ? guiObject : eventName
-        ];
-
-        if (typeof eventType === "object") return [eventType]; // if first and only argument is the Listener OBJECT
-        if (!eventName && !guiObject) return [this.listeners[eventType]]; // if first and only argument is the listener TYPE
-
-        return;
-    }
-
-    // EventHandler.remove/pause/resume("click")
-    // EventHandler.remove/pause/resume("click", "name")
-    // EventHandler.remove/pause/resume("click", "name", object)
-    // EventHandler.remove/pause/resume("click", object)
-    // EventHandler.remove/pause/resume(ListenerObject)
-    remove(eventType, eventName, guiObject) {
-        const listeners = this.getListenersWithFilter(eventType, eventName, guiObject);
-        console.log(listeners);
-    }
-
-    // @params: 
-    // add(eventName, object, func)
-    // add(eventName, customName, object, func)
-    add(eventType, customName, object, func) {
-        [customName, object, func] = [
-            !func ? false : customName, 
-            !func ? customName : object,
-            !func ? object : func
-        ];
-
-        console.log(eventType, customName, object, func)
-
-
-    }
-
-    pause(...args) {
-        this.config("pause", ...args);
     }
 
 }
