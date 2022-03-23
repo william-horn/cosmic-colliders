@@ -17,8 +17,7 @@
 | ABOUT DOCUMENT |
 ==================================================================================================================================
 
-! NOTE: DynamicState must ALWAYS be imported AFTER PseudoEvent. This is because DynamicState actually loads 
-! PseudoEvent before PseudoEvent loads itself. These two modules are co-dependant.
+
 
 ==================================================================================================================================
 
@@ -36,21 +35,17 @@ Coming soon
 | DOCUMENT TODO |
 ==================================================================================================================================
 
--   
+-   Find a way to re-implement 'onStateChanged' without causing stack loop with pseudo-events --NOT DONE
 
 ==================================================================================================================================
 */
 
-import PseudoEvent from "./pseudo-events-2.1.0.js";
 
 export default class DynamicState {
     constructor(states) {
         this.className = "DynamicState";
         this.states = states;
         this.state = "initial"; // default state
-
-        // events
-        this.onStateChanged = new PseudoEvent();
     }
 
     getState() {
@@ -65,10 +60,6 @@ export default class DynamicState {
 
         const oldState = this.state;
         this.state = this.states[state];
-
-        if (oldState != state) {
-            this.onStateChanged.fire(this.state);
-        }
     }
 
     isState(state) {

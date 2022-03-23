@@ -19,7 +19,7 @@ event.fire();
 // => "event 2 was fired!"
 ```
 
-By using `event.connect`, you schedule a new function to be called when the event is fired. These scheduled functions are callback functions, and you can pass arguments to them when an event is fired:
+By using `event.connect`, you schedule a new function to be called when the event is fired. These scheduled functions are callbacks, and you can pass arguments to them when an event is fired:
 
 _continuation of previous example:_
 
@@ -31,8 +31,29 @@ event.connect((arg1, arg2) => {
 });
 
 event.fire("Hello", "World!");
-// => "event 1 was fired!"
-// => "event 2 was fired!"
 // => "received: Hello  World  from event!"
+```
+
+Here's an example of creating a timer event. The following event will fire every second, allowing you to attach functions to be called when the event is fired.
+
+```javascript
+const timeEvent = new PseudoEvent();
+const secondsCounter = 0;
+
+// display the current time every second
+timeEvent.connect( 
+    currentTime => console.log("The current time is: ", currentTime)
+);
+
+// increment the secondsCounter variable by 1 every second
+timeEvent.connect(
+    () => secondsCounter++
+);
+
+// fire the event every second
+setInterval( 
+    () => timeEvent.fire(new Date()),
+    1000 
+)
 ```
 

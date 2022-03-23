@@ -96,38 +96,38 @@ function getRandomIndex(array) {
 
 // general iteration using callbacks for conditionals
 // @note this is probably really slow for big data structures
-function generalIteration(something, callback, condition, action) {
+function generalIteration(something, process, condition, action) {
     for (let key in something) {
         const val = something[key];
-        const result = callback(val);
-        if (condition(result)) action(key);
+        const result = process(val); // callback to process value
+        if (condition(result)) action(key); // condition processed result, then do action
     }
 }
 
 // inherits generalIteration
-function getAllOf(object, callback) {
+function getAllOf(object, process) {
     const all = [];
     generalIteration(
-        object, callback, 
-        result => !result === "undefined", 
-        key => all.push(object[key])
+        object, process, 
+        result => result, // condition
+        key => all.push(object[key]) // action
     );
     return all;
 }
 
 // inherits generalIteration
-function arrayRemoveAllOf(array, callback) {
+function arrayRemoveAllOf(array, process) {
     generalIteration(
-        array, callback, 
+        array, process, 
         result => result, 
         key => array.splice(key, 1)
     );
 }
 
 // inherits generalIteration
-function objectRemoveAllOf(object, callback) {
+function objectRemoveAllOf(object, process) {
     generalIteration(
-        object, callback, 
+        object, process, 
         result => result, 
         key => delete object[key]
     );
@@ -138,8 +138,8 @@ function objectRemoveAllOf(object, callback) {
 // treeSearch( {{{ ... }}}, () => {} )
 // recursive tree search 
 // @note probably super slow, remember to benchmark later
-function treeSearch(object, maxDepth, callback) {
-    callback = callback || maxDepth;
+function treeSearch(object, maxDepth, process) {
+    process = process || maxDepth;
     maxDepth = typeof maxDepth === "function" ? null : maxDepth;
 
     let depth = 0;
@@ -157,7 +157,7 @@ function treeSearch(object, maxDepth, callback) {
                     }
 
                 default:
-                    const result = callback(val);
+                    const result = process(val);
                     if (!result === undefined) results.push(val);
             }
         }
