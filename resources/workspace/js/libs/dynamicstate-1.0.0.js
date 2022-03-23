@@ -41,7 +41,7 @@ Coming soon
 ==================================================================================================================================
 */
 
-import PseudoEvent from "./pseudo-events-2.0.0.js";
+import PseudoEvent from "./pseudo-events-2.1.0.js";
 
 export default class DynamicState {
     constructor(states) {

@@ -7,7 +7,7 @@
 ? @author:                 William J. Horn
 ? @document-name:          gutil.js
 ? @document-created:       03/04/2022
-? @document-modified:      03/11/2022
+? @document-modified:      03/22/2022
 ? @document-version:       v1.0.0
 
 ==================================================================================================================================
@@ -94,6 +94,45 @@ function getRandomIndex(array) {
     return array[randomInt(array.length - 1)];
 }
 
+// general iteration using callbacks for conditionals
+// @note this is probably really slow for big data structures
+function generalIteration(something, callback, condition, action) {
+    for (let key in something) {
+        const val = something[key];
+        const result = callback(val);
+        if (condition(result)) action(key);
+    }
+}
+
+// inherits generalIteration
+function getAllOf(object, callback) {
+    const all = [];
+    generalIteration(
+        object, callback, 
+        result => !result === "undefined", 
+        key => all.push(object[key])
+    );
+    return all;
+}
+
+// inherits generalIteration
+function arrayRemoveAllOf(array, callback) {
+    generalIteration(
+        array, callback, 
+        result => result, 
+        key => array.splice(key, 1)
+    );
+}
+
+// inherits generalIteration
+function objectRemoveAllOf(object, callback) {
+    generalIteration(
+        object, callback, 
+        result => result, 
+        key => delete object[key]
+    );
+}
+
 // api
 // treeSearch( {{{ ... }}}, depth=5, () => {} )
 // treeSearch( {{{ ... }}}, () => {} )
@@ -137,5 +176,9 @@ gutil.shallowCopyArray = shallowCopyArray;
 gutil.forInterval = forInterval;
 gutil.getClockHour = getClockHour;
 gutil.treeSearch = treeSearch;
+gutil.generalIteration = generalIteration;
+gutil.arrayRemoveAllOf = arrayRemoveAllOf;
+gutil.objectRemoveAllOf = objectRemoveAllOf;
+gutil.getAllOf = getAllOf;
 
 export default gutil;

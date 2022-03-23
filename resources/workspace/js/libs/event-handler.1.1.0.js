@@ -7,8 +7,8 @@
 ? @author:                 William J. Horn
 ? @document-name:          event-handler.js
 ? @document-created:       03/16/2022
-? @document-modified:      03/16/2022
-? @document-version:       v1.0.0
+? @document-modified:      03/22/2022
+? @document-version:       v1.1.0
 
 ==================================================================================================================================
 
@@ -40,7 +40,8 @@ Coming soon
 ==================================================================================================================================
 */
 
-import DynamicState from "./dystates-1.0.0.js";
+import PseudoEvent from "./pseudo-events-2.1.0.js";
+import DynamicState from "./dynamicstate-1.0.0.js";
 
 // jQuery support for events
 const eventConnectorName = window.jQuery ? "on" : "addEventListener";
@@ -51,61 +52,45 @@ const eventHandlerStates = {
     "paused": "paused"
 }
 
-function interpretArgs(typeList, ...args) {
-    let argListStr = [...args];
-
-    for (let i = 0; i < argListStr.length; i++) {
-        argListStr[i] = typeof argListStr[i];
-    }
-
-    return argListStr.toString();
-}
-
-function findAll(arr, callback) {
-    const list = [];
-    for (let i = 0; i < arr.length; i++) {
-        const val = arr[i];
-        const result = callback(val);
-        if (!result === undefined) list.push(val);
-    }
-    return list;
-}
-
 class Listener extends DynamicState {
-    constructor(eventType, eventName, objRef, func, funcHandler) {
+    constructor(data) {
         super(eventHandlerStates);
         this.className = "Listener";
         this.setState("listening");
 
-        this.name = ""; // arbitrary, optional event name alias
-        this.type = ""; // name of the event type
-        this.objRef = ""; // actual reference to the object
-        this.callback = ""; // callback function given by the developer
-        this.handler = "" // handler function that wraps the callback function
+        this.name = data.name; // arbitrary, optional event name alias
+        this.type = data.type; // name of the event type
+        this.objRef = data.objRef; // actual reference to the object
+        this.callback = data.callback; // callback function given by the developer
+        this.handler = data.handler // handler function that wraps the callback function
+
+        this.parentEvent = data ? data.parent : undefined;
+        this.childEvents = [];
+        this.connections = [];
     }  
 }
 
 export default class EventHandler extends Listener {
     constructor() {
-        super();
+        super({});
         this.className = "EventHandler";
 
         /* 
-            this.connections = [
+            this.childEvents = [
                 ListenerObject,
                 ListenerObject,
                 ListenerObject,
             ]
 
-            this.listeners = {
-                "click": ListenerObject
-            }
+            this.connections = [
+
+            ]
+
+            this.parentEvent = none;
         */
-        this.connections = []; 
-        this.listeners = {};
     }
 
-    config(eventType, eventName, guiObject) {
+    getListenersWithFilter(eventType, eventName, guiObject) {
         [eventType, eventName, guiObject] = [
             eventType,
             typeof eventName === "object" ? null : eventName,
@@ -115,11 +100,7 @@ export default class EventHandler extends Listener {
         if (typeof eventType === "object") return [eventType]; // if first and only argument is the Listener OBJECT
         if (!eventName && !guiObject) return [this.listeners[eventType]]; // if first and only argument is the listener TYPE
 
-        return findAll(this.connections, listener => {
-            return listener.type === eventType
-                && listener.name === eventName || listener.name
-                && listener.objRef === guiObject || listener.objRef;
-        });
+        return;
     }
 
     // EventHandler.remove/pause/resume("click")
@@ -128,8 +109,8 @@ export default class EventHandler extends Listener {
     // EventHandler.remove/pause/resume("click", object)
     // EventHandler.remove/pause/resume(ListenerObject)
     remove(eventType, eventName, guiObject) {
-        const listeners = this.config(eventType, eventName, guiObject);
-
+        const listeners = this.getListenersWithFilter(eventType, eventName, guiObject);
+        console.log(listeners);
     }
 
     // @params: 
@@ -142,12 +123,8 @@ export default class EventHandler extends Listener {
             !func ? object : func
         ];
 
-        const cachedEventType = this.listeners[eventType];
-        if (!cachedEventType) {
-            this.listeners[eventType] = new Listener(
+        console.log(eventType, customName, object, func)
 
-            );
-        }
 
     }
 
