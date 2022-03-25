@@ -3,62 +3,145 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="./assets/css/style.css" />
   <title>Cosmic Colliders</title>
 </head>
 
-<body class="flex-column min-100-vh">
+<body>
+  <!-- header section -->
+  <!-- navigation tags on the top -->
   <header class="hero">
-    <h1 class="app-title"> Cosmic Colliders</h1>
+    <h1> 
+      <a href="/">Cosmic Colliders</a>
+    </h1>
     <nav>
-      <!--Here is an unordered list-->
       <ul>
           <li>
-              <a href="#search-engine-optimization">About Us</a>
+              <a href="#about-us">About Us</a>
           </li>
           <li>
-              <a href="#online-reputation-management">Find Comet Near You</a>
+              <a href="#find-comet-near-you">Find Comet Near You</a>
           </li>
           <li>
-              <a href="#social-media-marketing">Contact Us</a>
+              <a href="#contact-us">Contact Us</a>
           </li>
       </ul>
   </nav>
   </header>
+ <!-- end navigation -->
 
+ <!-- hero/jumbotron -->
+ <section id="find-a-comet-near-you" class="hero" class="flex-row justify-space-between">
+  <div class="hero-cta">
+    <h2>Is There A Comet/Meteor Near You?</h2>
+    <p>
+   WELCOME to Cosmic Colliders! A website that tells you the nearest comet or meteor close by. 
+    </p>
+  </div>
+ </section>
+ <!-- end header -->
+<!--Input how to search form here-->
+<section>
+<div class="col-12 col-md-4">
+  <div class="card">
+    <h3 class="card-header text-uppercase section-title hero">Search by City</h3>
+    <form id="user-form" class="card-body">
+      <label class="form-label" for="username">City Name</label>
+      <input name="username" id="username" type="text" autofocus="true" class="form-input" />
+      <button type="submit" class="btn">Go</button>
+    </form>
+  </div>
 
-  <main class="flex-row justify-space-between">
-    <div class="col-12 col-md-4">
-      <div class="card">
-        <h3 class="card-header text-uppercase">Search By User</h3>
-        <form id="user-form" class="card-body">
-          <label class="form-label" for="username">Username</label>
-          <input name="username" id="username" type="text" autofocus="true" class="form-input" />
-          <button type="submit" class="btn">Get User</button>
+  <div class="card">
+    <h3 class="card-header text-uppercase section-title hero">Search By</h3>
+    <div class="card-body">
+      <button class="btn">City</button>
+      <button class="btn">Date of Impact</button>
+      <button class="btn">ID</button>
+    </div>
+  </div>
+</div>
+<!--end of input form-->
+<!--Results-->
+<div>
+  <h2 class="section-title secondary-border">Showing Meteors/Comets Near You: </h2>
+  </div>
+</section>
+
+ <!-- #About us start - <section> -->
+  <section id="about-us" class="intro">
+    <div class="flex-row">
+      <h2 class="section-title primary-border">
+        About Us
+      </h2>
+    </div>
+    <div class="flex-row">
+      <p>
+        Hi we are Cosmic Colliders. We join together as four coding bootcamp students to create this project. 
+        We are all students of UNC Chapel Hill. 
+        Our group members are made up of: Amy Nikitas, Gabrielle Befort, William Horn and Christopher James Hoke. 
+        We are passionate about coding and love bouncing ideas off one another. 
+    </div>
+  </section>
+  <!-- end #About Us -->
+
+  <!-- "contact us" start -->
+  <section id="contact-us" class="contact">
+    <div class="flex-row">
+      <h2 class="section-title secondary-border">
+        Contact Us
+      </h2>
+    </div>
+
+    <div class="contact-info">
+      <div>
+        <h3>Cosmic Colliders</h3>
+        <p>
+          Any questions or concerns? 
+          <br/>
+          Let us know and we'll be happy to talk to you!
+        </p>
+
+        <address>
+          555 Space Rd. <br/>
+          Some Town, NC <br/>
+          12345<br/>
+          P: 555.SUN.RAYZ (555.786.2839)<br/>
+          E: <a href="mailto:mrsbefort@gmail.com">sunrayz@cosmetcolliders.com</a>
+        </address>
+        
+      </div>
+
+      <div class="contact-form">
+        <h3>Contact Us</h3>
+        <form>
+          <label for="contact-name">Your Name</label>
+          <input type="text" id="contact-name" placeholder="Your Name" />
+      
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" placeholder="Message"></textarea>
+      
+          <button type="submit">Submit</button>
         </form>
       </div>
-
-      <div class="card">
-        <h3 class="card-header text-uppercase">Search By Topic</h3>
-        <div id="language-buttons" class="card-body">
-          <button data-language="javascript" class="btn">JavaScript</button>
-          <button data-language="html" class="btn">HTML</button>
-          <button data-language="css" class="btn">CSS</button>
-        </div>
-      </div>
+      
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12182.30520634488!2d-74.0652613!3d40.2407219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1561060983193!5m2!1sen!2sus"
+        frameborder="0" style="border:0" allowfullscreen>
+      </iframe>
     </div>
+  </section>
+  <!-- "contact us" end -->
 
-    <div class="col-12 col-md-8">
-      <h2 class="subtitle">Showing Repositories for: <span id="repo-search-term"></span></h2>
-      <div id="repos-container" class="list-group">
-
-      </div>
+  <!-- footer -->
+  <footer>
+    <h2>Cosmic Colliders</h2>
+    <div>
+      &copy; 2022 Cosmic Colliders, Inc.
     </div>
-  </main>
+  </footer>
+  <!-- footer end -->
 
   <script src="./assets/js/homepage.js"></script>
 </body>
