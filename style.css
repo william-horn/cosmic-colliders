@@ -1,0 +1,73 @@
+
+*{
+    background-image: linear-gradient(180deg, grey, grey) ;
+    color: white;
+}
+body{
+    background-color: rgb(88, 88, 88);
+}
+
+img{
+    width:75%;
+    margin-left: 125px;
+    border: 4px teal solid;
+    border-radius: 2%;
+}
+
+tr {
+    border-bottom: 2px solid whitesmoke;
+    
+}
+
+th {
+    background-color: grey;
+    color:red;
+}
+
+.loading-bar {
+    display: none;
+    position: relative;
+    width:50%;
+    height: 50px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 200px;
+    margin-bottom: 10px;
+    /* animation: trippy-rotation 4s linear infinite; */
+    background: black !important;
+}
+
+.loading-bar > div {
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    background: green !important;
+    /* animation: loading 3s linear infinite; */
+    display: flex;
+    justify-content: center;
+}
+
+.loading-bar-anim {
+    display: block;
+    animation: trippy-rotation 4s linear infinite,
+}
+
+.loading-bar-anim > div {
+    animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+    0% { left: -200px; }
+    100% { left: 100%; }
+}
+
+@keyframes trippy-rotation {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+
+@media screen and (min-width: 1000px) {
+    .loading-bar {
+        width: 30%;
+    }
+}
