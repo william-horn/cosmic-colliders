@@ -7,9 +7,8 @@
 ? @author:                 William J. Horn
 ? @document-name:          pseudo-events.js
 ? @document-created:       03/08/2022
-? @document-modified:      03/22/2022
+? @document-modified:      03/28/2022
 ? @document-version:       v2.1.0
-
 ==================================================================================================================================
 
 ? @document-info
@@ -26,38 +25,7 @@ Coming soon
 | ABOUT API |
 ==================================================================================================================================
 
-Event.connect("click", () => {}))           // can disconnect with: Event.disconnect("click")
-Event.connect(() => {})                     // can only disconnect with: Event.disconnectAll()
-
-Event.strongConnect("click", () => {})      // can only disconnect with: Event.disconnect("click", true)
-Event.strongConnect(() => {})               // can only disconnect with: Event.disconnectAll(true)
-
-Event.factoryConnect("click", () => {})     // cannot disconnect once set
-Event.factoryConnect(() => {})              // cannot disconnect once set
-
-
-const customEvent = new Event()
-
-const connection1 = customEvent.connect( () => {} ) // connect just a function
-const connection2 = customEvent.connect( "eventName", () => {} ) // connect a function with a given name
-
-customEvent.disconnect(connection1) // disconnect a connection literal
-customEvent.disconnect("eventName") // disconnect all events with name "eventName"
-customEvent.disconnect("eventName", func)
-customEvent.disconnect(func)
-customEvent.disconnectAll() // disconnect all connections
-
-customEvent.pause(connection2) // pause a connection literal (this connection won't fire until it's resumed)
-customEvent.pause("eventName") // pause all events by name
-customEvent.pauseAll() // pause all events
-
-customEvent.resume(connection2) // resume connection literal
-customEvent.resume("eventName") // resume connections by name
-customEvent.resumeAll() // resume all connections
-
-customEvent.fire(connection2, ...) // fire a connection literal with arguments '...'
-customEvent.fire("eventName") // fire all connections by name with arguments '...'
-customEvent.fire(...) // fire all connections with arguments '...'
+See documentation
 
 ==================================================================================================================================
 
@@ -103,8 +71,13 @@ function resumer(key) {
 
 // read-only object
 // contains connection information
-export class Connection extends DynamicState {
-    constructor(connectionType, name, func=name) { // connectionType="type", name*="name", func=func
+class Connection extends DynamicState {
+    constructor(connectionType, name, func) { // connectionType="type", name*="name", func=func
+        [name, func] = [
+            func ? name : undefined,
+            func ? func : name
+        ]
+
         super(eventStates);
         this.setState("listening");
 
@@ -120,7 +93,7 @@ export class Connection extends DynamicState {
     }
 }
 
-export class PseudoEvent extends DynamicState {
+export default class PseudoEvent extends DynamicState {
     constructor(eventName, eventParent) {
         // arrange args
         const typeof_eventName = typeof eventName;
@@ -174,12 +147,9 @@ export class PseudoEvent extends DynamicState {
     }
 
     applyFilter(connectionName, connectionFunc, override, action) {
-        const typeof_connectionName = typeof connectionName;
-        const typeof_connectionFunc = typeof connectionFunc;
-
-        const isFunc_connectionFunc = typeof_connectionFunc === "function";
-        const isObj_connectionName = typeof_connectionName === "object";
-        const isStr_connectionName = typeof_connectionName === "string";
+        // data types BEFORE conversion
+        let isFunc_connectionFunc = typeof connectionFunc === "function";
+        let isFunc_connectionName = typeof connectionName === "function";
 
         const connections = this.connections;
 
@@ -187,16 +157,21 @@ export class PseudoEvent extends DynamicState {
         // todo: there's probably a better, more generalized way to do this. think of it later.
         // @note maybe use arrays to sort by type?
         [connectionName, connectionFunc, override] = [
-            isFunc_connectionFunc
-            ? undefined : connectionName,
+            isFunc_connectionName
+                ? undefined : connectionName,
 
-            isFunc_connectionFunc
-            ? connectionName : isFunc_connectionFunc
-            ? connectionFunc : undefined,
+            isFunc_connectionName
+                ? connectionName : isFunc_connectionFunc
+                ? connectionFunc : undefined,
 
             connectionFunc === true 
                 ? connectionFunc : override
         ];
+
+        // data types AFTER conversion
+        const typeof_connectionName = typeof connectionName;
+        const isObj_connectionName = typeof_connectionName === "object";
+        const isStr_connectionName = typeof_connectionName === "string";
 
         // the above logic will produce:
         //
@@ -221,12 +196,11 @@ export class PseudoEvent extends DynamicState {
         // * connectionName can be a string OR an object
         gutil.generalIteration(
             connections,
-            val => {
-                return val.isMutable(override)
+            val => val.isMutable(override)
                     && (isStr_connectionName ? val.name === connectionName : true)
                     && (connectionFunc ? val.source === connectionFunc : true)
-                    && (isObj_connectionName ? (connectionName === val) : true)
-            },
+                    && (isObj_connectionName ? (connectionName === val) : true),
+
             result => result, 
             key => action.call(this, key)
         );
@@ -241,11 +215,11 @@ export class PseudoEvent extends DynamicState {
         this.applyFilter(name, func, override, pauser);
     }
 
-    resume(name, func) {
+    resume(name, func, override) {
         this.applyFilter(name, func, override, resumer);
     }
 
-    fire(...args) {
+    trigger(...args) {
         if (!this.hasPermissionToFire()) return;
         const connections = this.connections;
 
