@@ -1,0 +1,55 @@
+
+.outline,
+.outline-red, 
+.outline-blue, 
+.outline-all > * {
+    border: 1px solid white;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.outline-red {
+    border: 1px solid red;
+}
+
+.outline-blue {
+    border: 1px solid blue;
+}
+
+/* debug block */
+.block {
+    background-color: black;
+    width: 200px;
+    height: 200px;
+}
+
+.hide {
+    display: none;
+}
+
+.hide-all > * {
+    display: none;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.black {
+    background-color: black;
+}
+
+.green {
+    background-color: green;
+}
+
+.white {
+    background-color: white;
+}
+
+.wireframe * {
+    border: 1px solid red !important;
+}
