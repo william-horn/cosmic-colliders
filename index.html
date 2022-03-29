@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,4 +147,199 @@
   <script src="./assets/js/homepage.js"></script>
 </body>
 
+=======
+<!-- 
+? @document-start
+================
+| LANDING PAGE |
+==================================================================================================================================
+
+? @author:                  Cosmic Colliders™ Team
+                            James Primitive (Christopher J. Hoke),
+                            Amy Nikitas, 
+                            Gabrielle Befort, 
+                            William J. Horn
+
+? @document-name:           index.html
+? @document-created:        03/22/2022
+? @document-modified:       03/22/2022
+? @document-version:        v1.0.0
+
+==================================================================================================================================
+
+? @document-info
+==================
+| ABOUT DOCUMENT |
+==================================================================================================================================
+
+Coming soon
+
+==================================================================================================================================
+
+? @document-todo
+=================
+| DOCUMENT TODO |
+==================================================================================================================================
+
+==================================================================================================================================
+ -->
+
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- ** Title ** -->
+        <title>Webpage</title>
+
+        <!-- ** Metadata ** -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <meta name="author" content="Cosmic Colliders Team"/>
+        <meta name="description" content="Observe the potential dangers of space"/>
+
+        <!-- ** CSS Third Party ** -->
+        <!-- random starter font apis -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Press+Start+2P&family=Raleway:wght@100&family=Source+Code+Pro:wght@200;300;400&display=swap">
+        <!-- Bulma Framework -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/> 
+
+        <!-- ** Local CSS ** -->
+        <!-- css libraries -->
+        <link rel="stylesheet" href="./resources/workspace/css/libs/visibility.css"/> <!-- css visibility utility -->
+        <!-- main styles -->
+        <link rel="stylesheet" href="./resources/workspace/css/main-style.css"/>
+	</head>
+	
+	<body class="">
+        <!-- BEGIN HTML FRAMEWORK HERE >>BEGIN -->
+
+        <!-- All page content -->
+        <div class="content mb-0 has-text-centered">
+
+            <!-- Main page header -->
+            <header class="main-header p-4 has-background-info">
+                <h1 class="title is-1 has-text-primary-light">Cosmic Colliders</h1>
+                <p class="is-size-7">Is there a NEO coming to a town near you?</p>
+            </header>
+
+            <!-- Main page body (contains everything between <header> and <footer> -->
+            <main class="container mt-3 mb-4 p-4">
+
+                <!-- Instructional help section. Provides some information on what we are and how to use our app. -->
+                <div class="columns is-centered">
+                    <div class="content column is-four-fifths">
+                        <p>
+                            <!-- ? maybe replace these <strong> tags with <span> and style them in css later ? -->
+                            <strong>Welcome to Cosmic Colliders!</strong> This application allows you to search 
+                            through our cosmic neighborhood for interesting near-Earth objects (NEOs for short), while
+                            providing some relevant data about them along with some popular space images that were 
+                            taken at the time!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Main search bar -->
+                <div class="search-container columns is-centered mb-6">
+                    <div class="field column is-two-thirds">
+                        <div class="control is-large"> <!-- @note: add 'is-loading' class to this div in the Javascript to show loading animation -->
+                            <input class="input is-medium" type="text" placeholder="Search for NEOs based on...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search result containers -->
+                <div class="search-result-container columns">
+
+                    <!-- NEO Data table column -->
+                    <div class="column p-3 my-6 has-background-grey-lighter"> <!-- @note: change background color later -->
+
+                        <!-- Column header -->
+                        <div class="column-header">
+                            <h2 class="title">NEO Data</h2>
+                        </div>
+
+                        <!-- Column content -->
+                        <table class="table has-text-left">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Distance</th>
+                                    <th>Date Observed</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- ! generate these in main.js ! -->
+                                <tr>
+                                    <td><a href="/">Big rock</a></td>
+                                    <td>1</td>
+                                    <td>38</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/">Medium rock</a></td>
+                                    <td>1</td>
+                                    <td>38</td>
+                                <tr>
+                                    <td><a href="/">Kinda small rock</a></td>
+                                    <td>1</td>
+                                    <td>38</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <!-- Astronomy picture of the day column -->
+                    <div class="column p-3 my-6 ml-3 has-background-grey-lighter">
+
+                        <!-- Column heading -->
+                        <header class="column-header content">
+                            <h2 class="title">Relevant Images</h2>
+                            <div class="columns is-centered is-mobile px-6">
+                                <button class="button column is-half p-0 mx-2">Button 1</button>
+                                <button class="button column is-half p-0 mx-2">Button 2</button>
+                            </div>
+                        </header>
+
+                        <!-- Column content -->
+                        <div class="image-container">
+                            <img src="https://bulma.io/images/placeholders/256x256.png">
+                            <img src="https://bulma.io/images/placeholders/256x256.png">
+                            <img src="https://bulma.io/images/placeholders/256x256.png">
+                        </div>
+                    </div>
+                </div>
+
+            <!-- End Main page body -->
+            </main>
+
+            <footer class="p-4 pb-5 has-background-info">
+                <div class="footer-heading">
+                    <h2 class="title is-3 has-text-primary-light">About Us</h2>
+                </div>
+
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column is-half">
+                            <a>Contact Us</a>
+                             | 
+                            <a>Join Our Team!</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+
+        <!-- BEGIN FRAMEWORK HERE <<END -->
+        <!-- Load jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- load main script -->
+		<script type="module" src="./resources/workspace/js/main.js"></script>
+	</body>
+>>>>>>> f48342d0d7cef3b25263e14009b93c74c0611ef5
 </html>

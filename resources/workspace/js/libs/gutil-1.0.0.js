@@ -96,6 +96,7 @@ function getRandomIndex(array) {
 
 // general iteration using callbacks for conditionals
 // @note this is probably really slow for big data structures
+// todo: look into iterator functions to try and generalize this iteration for arrays and objects
 function generalIteration(something, process, condition, action) {
     for (let key in something) {
         const val = something[key];
