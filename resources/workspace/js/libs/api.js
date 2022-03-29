@@ -29,7 +29,7 @@ NASA CAD API:
 NASA APOD API:
 
     Full documentation (github): https://github.com/nasa/apod-api
-    NASA API documentation found here: https://api.nasa.gov/
+    NASA API documentation found here: https://api.nasa.gov/#apod
     API Root: https://api.nasa.gov/planetary/apod
 
 

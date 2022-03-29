@@ -52,14 +52,22 @@ getAPIRequest('apod', {
 });
 
 // works
-getAPIRequest('cad', {
+// getAPIRequest('cad', {
+//     useProxy: true,
+//     formatted: true,
+//     params: {
+//         "dist-max": "0.001",
+//         "date-min": "2021-01-01",
+//         "sort": "dist",
+//         "body": "Earth",
+//     }
+// });
+
+const nasaCADRequest = getAPIRequest('cad', {
     useProxy: true,
-    formatted: true,
     params: {
-        "dist-max": "0.001",
-        "date-min": "2021-01-01",
-        "sort": "dist",
-        "body": "Earth",
+        'sort': 'dist',
+        'dist-max': '0.001'
     }
 });
 
