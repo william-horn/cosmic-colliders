@@ -46,7 +46,7 @@ const searchSettings = {
 
 const nasaAPI = {
     closestObjects: "https://ssd-api.jpl.nasa.gov/cad.api?dist-max=10LD&date-min=2018-01-01&sort=dist",
-    images: "",
+    images: "https://api.nasa.gov/planetary/apod?count=100&api_key=mk9inSh4h7X81NqSrvsafOyi2wEFix6zKEMbhYql",
 }
 
 async function getRequest(url, useDarkMagic) {
@@ -54,6 +54,12 @@ async function getRequest(url, useDarkMagic) {
     const responseData = await response.json();
 
     return responseData;
+}
+
+function formatImageData(responseData2) {
+    const imageMaps = [
+        
+    ]
 }
 
 // does cool table stuff that gives field keys to values of object data
@@ -101,5 +107,19 @@ getRequest(nasaAPI.closestObjects, true).then(closestObjects => {
 
 })
 
+// "https://api.nasa.gov/planetary/apod?count=100&api_key=mk9inSh4h7X81NqSrvsafOyi2wEFix6zKEMbhYql"
 
+getRequest(nasaAPI.images, true).then(images => {
+    console.log(images)        
+        let tableData2=""
+        images.map((values)=>{
+        tableData2+=`<tr>
+        <td>${values.title}</td>
+        <td>${values.date}</td>
+        <td><img src="${values.url}"/></td>
+        </tr>`
+        $("#table_body2").html(tableData2);
+        })
+    
+})
 
