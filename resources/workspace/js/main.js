@@ -17,8 +17,6 @@
 | ABOUT DOCUMENT |
 ==================================================================================================================================
 
-Coming soon
-
 ==================================================================================================================================
 
 ? @document-changelog
@@ -43,20 +41,27 @@ Coming soon
 /* ---------------- */
 /* Import Libraries */
 /* ---------------- */
-import {getAPIRequest} from "./libs/nasaAPI.js"
+import { getAPIRequest } from './libs/api.js';
 
-// getAPIRequest('cad', {
-//     proxy: true,
-//     params: {
-//         "dist-max": "0.001", // 0.001
-//         "date-min": "2021-01-01",
-//         "sort": "dist",
-//         "body": "Earth",
-//     }
-// });
+// works
+getAPIRequest('apod', {
+    useApiKey: true,
+    params: {
+        'count': '100',
+    }
+});
 
-getAPIRequest("https://api.nasa.gov/planetary/apod?count=100&api_key=mk9inSh4h7X81NqSrvsafOyi2wEFix6zKEMbhYql");
-
+// works
+getAPIRequest('cad', {
+    useProxy: true,
+    formatted: true,
+    params: {
+        "dist-max": "0.001",
+        "date-min": "2021-01-01",
+        "sort": "dist",
+        "body": "Earth",
+    }
+});
 
 
 /* ------------------------- */
