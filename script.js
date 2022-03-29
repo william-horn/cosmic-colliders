@@ -117,6 +117,7 @@ getRequest(nasaAPI.images, true).then(images => {
         <td>${values.title}</td>
         <td>${values.date}</td>
         <td><img src="${values.url}"/></td>
+        <td><p>${values.explanation}<p></td>
         </tr>`
         $("#table_body2").html(tableData2);
         })
