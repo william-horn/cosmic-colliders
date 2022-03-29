@@ -1,7 +1,8 @@
 
 *{
-    background-image: linear-gradient(180deg, grey, grey) ;
+    background-image: linear-gradient(180deg, #181b69, black);
     color: white;
+    border: 2px solid black;
 }
 body{
     background-color: rgb(88, 88, 88);
