@@ -6,12 +6,13 @@
 }
 body{
     background-color: rgb(88, 88, 88);
+    font-size: large;
 }
 
 img{
     width:75%;
     margin-left: 125px;
-    border: 4px teal solid;
+    border: 4px rgb(12, 0, 78) solid;
     border-radius: 2%;
 }
 
