@@ -2696,6 +2696,8 @@ div.icon-text {
 .table {
   background-color: white;
   color: #363636;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .table td,
