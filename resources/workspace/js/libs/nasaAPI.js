@@ -50,6 +50,9 @@ const sources = {
         root: 'https://ssd-api.jpl.nasa.gov/cad.api',
         //apiKey: 'mk9inSh4h7X81NqSrvsafOyi2wEFix6zKEMbhYql',
     }),
+    imgs: getAPIData({
+        root: 'https://images-api.nasa.gov/search',
+    }),
 }
 
 function getAPIData(options) {
@@ -110,18 +113,27 @@ function getAPIData(options) {
     return api;
 }
 
-export async function getAPIRequest(source, options={}) {
-    // build api params
-    const api = sources[source];
-    const url = api.getUrl(options);
+// export async function getAPIRequest(source, options={}) {
+//     // build api params
+//     const api = sources[source];
+//     const url = api.getUrl(options);
 
-    console.log('constructed url: ', url);
+//     console.log('constructed url: ', url);
 
-    const response = await fetch(url)
+//     const response = await fetch(url)
+//     const responseData = await response.json();
+
+//     console.log('raw data: ', responseData);
+//     console.log('data: ', api.formatFields(responseData));
+
+//     return responseData;
+// }
+
+export async function getAPIRequest(source) {
+    const response = await fetch(source)
     const responseData = await response.json();
 
     console.log('raw data: ', responseData);
-    console.log('data: ', api.formatFields(responseData));
 
     return responseData;
 }

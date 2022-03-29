@@ -45,15 +45,18 @@ Coming soon
 /* ---------------- */
 import {getAPIRequest} from "./libs/nasaAPI.js"
 
-getAPIRequest('cad', {
-    proxy: true,
-    params: {
-        "dist-max": "0.001", // 0.001
-        "date-min": "2021-01-01",
-        "sort": "dist",
-        "body": "Earth",
-    }
-});
+// getAPIRequest('cad', {
+//     proxy: true,
+//     params: {
+//         "dist-max": "0.001", // 0.001
+//         "date-min": "2021-01-01",
+//         "sort": "dist",
+//         "body": "Earth",
+//     }
+// });
+
+getAPIRequest("https://api.nasa.gov/planetary/apod?count=100&api_key=mk9inSh4h7X81NqSrvsafOyi2wEFix6zKEMbhYql");
+
 
 
 /* ------------------------- */
