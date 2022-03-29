@@ -2,9 +2,10 @@
 .outline,
 .outline-red, 
 .outline-blue, 
-.outline-all > * {
+.outline-all * {
+    color: white;
     border: 1px solid white;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .outline-red {

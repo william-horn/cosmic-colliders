@@ -43,15 +43,15 @@ Coming soon
 /* ---------------- */
 import { getAPIRequest } from './libs/api.js';
 
-// works
-getAPIRequest('apod', {
-    useApiKey: true,
-    params: {
-        'count': '100',
-    }
-});
+// MAIN USE
+// getAPIRequest('apod', {
+//     useApiKey: true,
+//     params: {
+//         'count': '100',
+//     }
+// });
 
-// works
+// MAIN USE
 // getAPIRequest('cad', {
 //     useProxy: true,
 //     formatted: true,
@@ -63,13 +63,13 @@ getAPIRequest('apod', {
 //     }
 // });
 
-const nasaCADRequest = getAPIRequest('cad', {
-    useProxy: true,
-    params: {
-        'sort': 'dist',
-        'dist-max': '0.001'
-    }
-});
+// const nasaCADRequest = getAPIRequest('cad', {
+//     useProxy: true,
+//     params: {
+//         'sort': 'dist',
+//         'dist-max': '0.001'
+//     }
+// });
 
 
 /* ------------------------- */

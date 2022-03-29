@@ -27,6 +27,9 @@
 ==================================================================================================================================
 */
 
+/* ---------------- */
+/* Global Variables */
+/* ---------------- */
 
 /*This is the color scheme for our website*/
 :root {
@@ -40,340 +43,51 @@
     --border-radius: .3rem;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    background-image: url("../images/space.jpeg")
-}
+/* ------------------- */
+/* Global Declarations */
+/* ------------------- */
+
+/* overwrite bulma styles */
+html {
+    
+} 
 
 body {
-    color: var(--purple);
-    font-family: Helvetica, Arial, sans-serif;
-}
-
-/* HEADER / NAV BAR STYLES START */
-header {
-    padding: 20px 35px;
-    background-color: var(--pink);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    background-image: url("../images/space.jpeg");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: 80%;
-    z-index: 9999;
-}
-
-header h1 {
-    font-weight: bold;
-    margin: 0;
-    font-size: 36px;
-    color: var(--white);
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-header a {
-    text-decoration: none;
-    color: var(--white);
-}
-
-header nav {
-    margin: 7px 0;
-}
-
-header nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-}
-
-header nav ul li a {
-    padding: 10px 15px;
-    font-weight: lighter;
-    font-size: 1.55vw;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-header nav ul li a:hover {
-    background: var(--blue);
-    color: var(--white);
-    border-radius: 15px;
-    text-shadow: none;
-}
-
-/* HEADER / NAVBAR STYLES END */
-
-/* FOOTER STYLES START */
-footer {
-    background: var(--dr-blue);
-    padding: 40px 35px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-footer h2 {
-    color: var(--white);
-    font-size: 30px;
-    margin: 0;
-}
-
-footer div {
-    line-height: 1.5;
-    text-align: right;
-    color: var(--white);
-}
-/* END FOOTER STYLES */
-
-/* HERO STYLES START */
-.hero {
-    background-image: url('../images/space.jpeg');
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    background-attachment: fixed;
-    background-position: 80%;
-}
-
-.hero-cta {
-    width: 35%;
-    text-align: right;
-    margin: 3.5%;
-    color: #fff;
-    font-size: 18px;
-    line-height: 1.2;
-}
-
-.hero-cta h2 {
-    font-style: italic;
-    font-size: 55px;
-    color: var(--white);
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-/*text header styles*/
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 700;
-    margin: 0;
-    color: var(--pink);
-    line-height: 1.25;
-}
-
-main {
-    margin: 20px auto;
-    width: 94%;
-    color: var(--white);
-}
-/*button styles*/
-.btn {
-    font-size: 1.3rem;
-    text-decoration:none;
-    padding: 6px 5px;
-    width: 100%;
-    display: block;
-    margin: 5px 0;
-    border-radius: var(--border-radius);
-    color: var(--white);
-    border: none;
-    outline: none;
-    background-color: var(--lt-blue);
-    box-shadow: 3px 3px var(--dr-blue);
-    transform: translate(-1px, -1px);
-}
-
-.btn:hover {
-    color: var(--white);
-    background-color: var(--purple);
-    transform: translate(0, 0);
-    box-shadow: 2px 2px var(--dr-pink);
-}
-
-/* About Us STYLES */
-.intro p {
-    line-height: 1.7;
-    color: var(--tertiary-color);
-    width: 80%;
-    margin: 0 auto;
-    font-size: 20px;
-    text-align: center;
-}
-/* SECTION TITLE STYLES START */
-.section-title {
-    font-size: 48px;
-    border-bottom: 3px solid;
-    color: var(--lt-blue);
-    padding-bottom: 20px;
-    text-align: center;
-    margin: 0 auto 35px auto;
-    width: 50%;
-}
-
-.primary-border {
-    border-color: var(--purple);
-}
-
-.secondary-border {
-    border-color: var(--pink);
-}
-/* SECTION TITLE STYLES END */
-/* About Us END */
-
-/* CARDS */
-.card {
-    margin: 0 0 20px 0;
-    border: 3px solid var(--purple);
-    border-radius: var(--border-radius);
-}
-
-.card-header {
-    color: var(--dr-pink);
-    padding: 2.5%;
-    border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
-}
-
-.card-body {
-    padding: 2.5%;
-    background-color: var(--purple)
-}
-
-/* FORM */
-.form-label,
-    .form-input {
-    display: block;
-}
-
-.form-label {
-    font-size: 1.1rem;
-    margin: 0 0 0 5px;
-    color: var(--white)
-}
-
-.form-input {
-    width: 100%;
-    padding: 3%;
-    margin: 5px 0;
-    font-size: 1.2rem;
-    border: 2px solid var(--purple);
-    border-radius: var(--border-radius);
-}
-
-/* HEIGHT / WIDTH UTILS */
-.min-100-vh {
-    min-height: 100vh;
-}
-
-.min-100-vw {
-    min-width: 100vw;
-}
-
-/* FONT UTILS */
-.text-uppercase {
-    text-transform: uppercase;
-}
-
-
-/* FLEX CONTENT */
-.flex-row {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.justify-space-between {
-    justify-content: space-between;
-}
-
-/* REACH OUT STYLES START */
-.contact {
-    background-image: url(../images/space.jpeg);
-}
-
-.contact h2 {
-    color: var(--white);
-}
-
-.contact-info {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.contact-info > * {
-    flex: 1;
-    margin: 15px;
-}
-
-.contact-info iframe {
-    height: 400px;
-}
-
-.contact-info div {
-    color: white;
-}
-
-.contact-info h3 {
-    color: var(--pink);
-    font-size: 32px;
-}
-
-.contact-info p, .contact-info address {
-    margin: 20px 0;
-    line-height: 1.5;
-    font-size: 16px;
-    font-style: normal;
-}
-
-.contact-form input, .contact-form textarea {
-    border: 1px solid var(--purple);
-    display: block;
-    padding: 7px 15px;
-    font-size: 16px;
-    color: var(--purple);
-    width: 100%;
-    margin-bottom: 15px;
-    margin-top: 5px;
-    border-radius: 10px;
-    background-color: rgba(255,255,255, 0.75);
-}
-
-.contact-form input:focus, .contact-form textarea:focus {
-    background-color: rgba(255,255,255, 1);
-    outline: none;
-}
-
-.contact-form button {
-    width: 100%;
-    border: none;
-    background: var(--blue);
-    color: var(--white);
-    text-align: center;
-    padding: 15px 0;
-    font-size: 16px;
-    border-radius: 10px;
-}
-
-.contact-form button:hover {
-    color: var(--lt-blue);
-    background: var(--dr-pink);
-}
-
-.contact-info a {
-    color: var(--pink);
-}
-/* REACH OUT STYLES END */
-
     
+}
+
+/* --------------- */
+/* Utility Classes */
+/* --------------- */
+
+.fill-viewport {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* ------------------ */
+/* Main Header Styles */
+/* ------------------ */
+
+/* Main <header> div */
+.main-header {
+
+}
+
+/* Header sub-text */
+.main-header > p {
+    color: #84c7ff;
+}
+
+/* ------------------- */
+/* Main Section Styles */
+/* ------------------- */
+
+.image-container {
+    background-color: #8e8e8e;
+    overflow-y: scroll;
+    height: 300px;
+}
+
+
