@@ -75,7 +75,7 @@ h1 {
     text-shadow: 0 0 5px rgb(131, 209, 255);
 }
 
-h2 {
+h2, h6 {
     color: white !important;
 }
 
