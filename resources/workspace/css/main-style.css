@@ -84,6 +84,68 @@ body {
 /* Main Section Styles */
 /* ------------------- */
 
+.neo-search-field-parent {
+    position: relative;
+}
+
+.neo-search-history-container {
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+.neo-search-history-container > button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background-color: inherit;
+    border-radius: 0;
+    border: none;
+    transition: background-color 0.25s;
+}
+
+.neo-search-history-container > button:hover {
+    background-color: rgb(199, 199, 199);
+}
+
+.search-dropdown {
+    z-index: 10;
+    position: absolute;
+    min-height: 50px;
+    background-color: rgb(219, 219, 219);
+    margin: 0 auto;
+    width: 100%;
+    padding: 10px;
+    display: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Modify scrollbar container */
+.neo-search-history-container::-webkit-scrollbar {
+    width: 10px;
+}
+  
+/* Modify scrollbar track */
+.neo-search-history-container::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f1f1f1;
+}
+
+/* Modify scrollbar thumb */
+.neo-search-history-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.neo-table-body {
+    height: 300px;
+    overflow-y: scroll;
+}
+
 .image-container {
     background-color: #8e8e8e;
     overflow-y: scroll;

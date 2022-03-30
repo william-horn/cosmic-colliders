@@ -1,4 +1,5 @@
 # **api.js** Documentation
+*Author: William J. Horn*
 
 This module was created with the intention of keeping the `main.js` file smaller and cleaner by writing all of the API request logic in `api.js`. This module also provides a nice interface when working with API requests, as it gives you some options to tack-on to a request URL in a quick, easy, and scalable fashion.
 

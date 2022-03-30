@@ -156,7 +156,7 @@ function getAPIData(apiOptions) {
     }
     })
 */
-export async function getAPIRequest(source, options={}) {
+export default async function getAPIRequest(source, options={}) {
     // build api params
     const api = APISources[source];
     const url = api.getUrl(options);
@@ -171,7 +171,7 @@ export async function getAPIRequest(source, options={}) {
     if (options.formatted && api.format) {
         const formattedData = api.format(responseData);
         console.log('formatted data: ', formattedData);
-        return 
+        return formattedData;
     }
 
     return responseData;
