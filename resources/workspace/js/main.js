@@ -211,7 +211,7 @@ function processSearchQuery(searchOptions) {
                 const chunk = neoData[i];
                 const nameToMatch = chunk.name.toString().toLowerCase() + chunk.date.toString().toLowerCase() + chunk.dist.toString().toLowerCase();
 
-                if (nameToMatch.match(searchQuery)) {
+                if (nameToMatch.match(searchQuery.toLowerCase())) {
                     sortedData.push(chunk);
                 }
             }
@@ -220,7 +220,9 @@ function processSearchQuery(searchOptions) {
                 const chunk = neoData[i];
                 const nameToMatch = chunk.name.toString().toLowerCase();
 
-                if (nameToMatch.match(searchQuery)) {
+                console.log(nameToMatch, ' => ', searchQuery);
+
+                if (nameToMatch.match(searchQuery.toLowerCase())) {
                     sortedData.push(chunk);
                 }
             }
