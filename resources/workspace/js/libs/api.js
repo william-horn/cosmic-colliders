@@ -167,6 +167,11 @@ export default async function getAPIRequest(source, options={}) {
     const responseData = await response.json();
 
     // console.log('raw data: ', responseData); // keep for debugging
+    if (responseData.code) {
+        console.log('request error: ', responseData.moreInfo);
+        console.log('issue: ', responseData.message);
+        return;
+    }
 
     if (options.formatted && api.format) {
         const formattedData = api.format(responseData);

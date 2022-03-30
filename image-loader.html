@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database of Mars Rover Images</title>
+    <link rel="stylesheet" href="./resources/workspace/css/image-loader-styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css%22/%3E">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+</head>
+<body>
+    <!-- <div class = "container">
+        <table class="table table is-bordered table is-fullwidth">
+            <thead class = "table-dark">
+            <tr>
+                <th scope="col">DES/Near Object Name</th>
+                <th scope="col">Distance (KM)</th>
+                <th scope="col">Date Observed</th>
+            </tr>
+            </thead>
+            <tbody id="table_body">
+            </tbody>
+        </table>
+    </div> -->
+    <div class="loading-bar">
+        <div>
+            <p>Transmitting Data</p>
+        </div>
+    </div>
+    <h1 class ="text-center">Database of Pictures</h1>
+    <div class = "container">
+        <table class="table table is-bordered table is-fullwidth">
+            <thead class = "table-dark">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Date</th>
+                <th scope="col">Images</th>
+                <th scope="col">Explanation</th>
+            </tr>
+            </thead>
+            <tbody id="table_body2">
+            </tbody>
+        </table>
+    </div>
+    <!-- <progress id="progress-bar" class="progress is-primary" value="70" max="100">15%</progress> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src = "./resources/workspace/js/image-loader.js"></script>
+
+</body>
+</html>

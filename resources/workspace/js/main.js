@@ -17,35 +17,6 @@
 | ABOUT DOCUMENT |
 ==================================================================================================================================
 
-MAIN USE
-getAPIRequest('apod', {
-    useApiKey: true,
-    params: {
-        'count': '100',
-    }
-});
-
-MAIN USE
-getAPIRequest('cad', {
-    useProxy: true,
-    formatted: true,
-    params: {
-        "dist-max": "0.001",
-        "date-min": "2021-01-01",
-        "sort": "dist",
-        "body": "Earth",
-    }
-});
-
-const nasaCADRequest = getAPIRequest('cad', {
-    useProxy: true,
-    params: {
-        'sort': 'dist',
-        'dist-max': '0.001'
-    }
-});
-
-
 ==================================================================================================================================
 
 ? @document-changelog
@@ -69,6 +40,7 @@ Coming soon
 /* ---------------- */
 import getAPIRequest from './libs/api.js';
 import datastore from './libs/datastore-1.0.0.js';
+import gutil from './libs/gutil-1.0.0.js';
 
 /* ------------------------- */
 /* Global Element References */
@@ -79,11 +51,13 @@ let neoTableBodyEl;
 let imageContainerEl;
 let neoSearchDropdownEl;
 let neoSearchDropdownContainerEl;
+let neoSearchFieldParentEl;
 let namebtnEl;
 let yearbtnEl;
 let distbtnEl;
-let img1El;
-
+let apodImg;
+let newApodBtn;
+let apodDescEl;
 
 /* ----------------------- */
 /* Internal Program States */
@@ -114,10 +88,14 @@ function loadUIReferences() {
     neoTableBodyEl = $('#neo-table-body');
     imageContainerEl = $('#image-container');
     neoSearchDropdownEl = $('#neo-search-dropdown');
+    neoSearchFieldParentEl = $('#neo-search-field-parent');
     neoSearchDropdownContainerEl = $('#neo-search-history-container');
     namebtnEl = $('#name-btn');
     yearbtnEl = $('#year-btn');
     distbtnEl = $('#dist-btn');
+    apodImg = $('#apod-img');
+    newApodBtn = $('#new-apod-btn');
+    apodDescEl = $('#apod-container i');
 }
 
 // generate data row from CAD API data
@@ -126,13 +104,15 @@ function createNEOTableRowString(neoData) {
         <tr>
             <td><a href="/">${neoData.name}</a></td>
             <td>${neoData.dist.toLocaleString("en-US") + 'KM'}</td>
-            <td>${neoData.date}</td>
+            <td>${neoData.date.substring(0, 12)}</td>
         </tr>
     `;
 }
 
 // generate NEO search results from CAD API
 function generateNEORows(neoDataCollection) {
+    if (!neoDataCollection) return cancelSearchLoadingAnim();
+
     $(neoTableBodyEl).empty();
     let rowString = '';
 
@@ -141,12 +121,47 @@ function generateNEORows(neoDataCollection) {
         rowString += createNEOTableRowString(neoDataCollection[i]);
     }
 
+    cancelSearchLoadingAnim();
     $(neoTableBodyEl).html(rowString);
+}
+
+function generateAPODImage() {
+    $(newApodBtn).addClass('is-loading');
+    const imagePromise = getAPIRequest('apod', {useApiKey:true , params : {count:1}});
+
+    imagePromise.then(imageCollect => {
+        $(apodImg).attr('src', imageCollect[0].url);
+        $(apodDescEl).text(imageCollect[0].explanation || 'No description available');
+        $(newApodBtn).removeClass('is-loading');
+    })
+}
+
+function startSearchLoadingAnim() {
+    $(neoSearchFieldEl).attr('disabled', true);
+    $(neoSearchFieldParentEl).addClass('is-loading');
+}
+
+function cancelSearchLoadingAnim() {
+    $(neoSearchFieldEl).attr('disabled', false);
+    $(neoSearchFieldParentEl).removeClass('is-loading');
 }
 
 // handle logic for user search
 function processSearchQuery(searchOptions) {
+
+    // searchOptions {
+        // query: [string] (user search-bar entry)
+        // saveHistory: [boolean] true/false (add search to history)
+        // searchFilter: [string] 'name'/'dist'/'date' (how to sort search results)
+    // }
     
+    // todo: add search algorithm (include search filters)
+    // todo: finish styling page --DONE
+    // todo: touch up search dropdown bar
+    // start responsive loading animations
+    startSearchLoadingAnim();
+
+    // make CAD request for relevant search data
     const NEODataPromise = getAPIRequest('cad', {
         useProxy: true,
         formatted: true,
@@ -158,18 +173,7 @@ function processSearchQuery(searchOptions) {
         }
     });
 
-    NEODataPromise.then(dataCollection => generateNEORows(dataCollection));
-    const imagePromise = getAPIRequest('apod', {useApiKey:true , params : {count:1}})
-    imagePromise.then(imageCollect => {
-        let tableData2=""
-        imageCollect.map((singleImage)=>{
-            tableData2+=`<tr>
-            <td><a href="${singleImage.url}"><img src="${singleImage.url}"/></a></td>
-            </tr>`
-            
-        })
-            $("#table_body2").html(tableData2);
-    })
+    NEODataPromise.then(generateNEORows);
 }
 
 //Button 1.click (connect to onSearchButtonPressed function) * Do for button 2 and 3 as well.
@@ -195,8 +199,9 @@ function addSearchQueryToHistory(searchData) {
     });
 }
 
+
 // function responsible for loading the NEO search history under the NEO search dropdown
-function loadNeoSearchHistory() {
+function loadNEOSearchHistory() {
     $(neoSearchDropdownContainerEl).empty() // clear old search result buttons
 
     // retrieve search history
@@ -239,7 +244,7 @@ function onSearchBarEnter(event) {
 function onSearchFocus(event) {
     $(neoSearchDropdownEl).show();
     $(neoSearchFieldEl).val('');
-    loadNeoSearchHistory();
+    loadNEOSearchHistory();
 }
 
 // when then user is off the search bar
@@ -254,11 +259,14 @@ function init() {
     // load all UI references
     loadUIReferences();
 
-    // Link callbacks to event listeners
+    // load first apid image
+    generateAPODImage();
 
+    // Link callbacks to event listeners
     $(neoSearchFieldEl).focusout(onSearchFocusLost);
     $(neoSearchFieldEl).focus(onSearchFocus);
     $(neoSearchFieldEl).keyup(onSearchBarEnter);
+    $(newApodBtn).click(generateAPODImage);
     $(namebtnEl).click( () => onSearchButtonPressed('name') )
     $(yearbtnEl).click( () => onSearchButtonPressed('date') )
     $(distbtnEl).click( () => onSearchButtonPressed('dist') )

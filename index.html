@@ -60,18 +60,18 @@ Coming soon
         <link rel="stylesheet" href="./resources/workspace/css/libs/visibility.css"/> <!-- css visibility utility -->
         <!-- main styles -->
         <link rel="stylesheet" href="./resources/workspace/css/main-style.css"/>
-	</head>
-	
-	<body background="resources\assets\imgs\space-galaxy-milky-way-110854.jpg" class="">
+    </head>
+    
+    <body class="">
         <!-- BEGIN HTML FRAMEWORK HERE >>BEGIN -->
 
         <!-- All page content -->
-        <div class="content mb-0 has-text-centered">
+        <div class="main-wrapper content mb-0 has-text-centered">
 
             <!-- Main page header -->
             <header class="main-header p-4 has-background-info">
-                <h1 class="title is-1 has-text-primary-light">Cosmic Colliders</h1>
-                <p class="is-size-7">Is there a NEO coming to a town near you?</p>
+                <h1 class="title is-1 has-text-primary-light has-text-weight-bold">Cosmic Colliders</h1>
+                <p class="is-size-6">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed, nam!</p>
             </header>
 
             <!-- Main page body (contains everything between <header> and <footer> -->
@@ -81,10 +81,10 @@ Coming soon
                 <div class="columns is-centered">
                     <div class="content column is-four-fifths">
                         <!-- ? maybe replace these <strong> tags with <p>> and style them in css later ? -->
-                        <strong>Welcome to Cosmic Colliders!</strong> 
+                        <p class="pb-1"><strong>Welcome to Cosmic Colliders!</strong></p> 
                         <p>
                             This application allows you to search 
-                            through our cosmic neighborhood for interesting near-Earth objects (NEOs for short), while
+                            through our cosmic neighborhood for interesting near-Earth objects (NEO for short), while
                             providing some relevant data about them along with some popular space images that were 
                             taken at the time!
                         </p>
@@ -94,17 +94,27 @@ Coming soon
                 <!-- Main search bar -->
                 <div class="search-container columns is-centered mb-6">
                     <div class="field column is-two-thirds">
-                        <div class="neo-search-field-parent control is-large"> <!-- @note: add 'is-loading' class to this div in the Javascript to show loading animation -->
-                            <input id="neo-search-field" class="input is-medium has-background-grey-lighter" type="text" placeholder="Search for NEOs based on...">
+                        <div id="neo-search-field-parent" class="control is-large"> <!-- @note: add 'is-loading' class to this div in the Javascript to show loading animation -->
+
+                            <!-- Search bar -->
+                            <input id="neo-search-field" 
+                                autocomplete="off"
+                                class="neo-search-field input is-medium" 
+                                type="text" 
+                                placeholder="Search...">
+
+                            <!-- Search dropdown -->
                             <div id="neo-search-dropdown" class="search-dropdown">
-                                <div id="neo-search-history-container" class="neo-search-history-container">
+                                <div id="neo-search-history-container" class="neo-search-history-container scroll-style">
                                     <!-- ! generate search result buttons in main.js ! -->
                                 </div>
                             </div>
-                            <div class="buttons are-medium is-centered pt-2">
-                                <button class="button is-info is-rounded" id="name-btn">Search by Name</button>
-                                <button class="button is-info is-rounded" id="year-btn">Search by Year</button>
-                                <button class="button is-info is-rounded" id="dist-btn">Search by Distance</button>
+
+                            <!-- Search filter buttons -->
+                            <div class="buttons is-small is-centered mt-5">
+                                <button class="button is-info is-rounded mx-3" id="name-btn">Search by Name</button>
+                                <button class="button is-info is-rounded mx-3" id="year-btn">Search by Year</button>
+                                <button class="button is-info is-rounded mx-3" id="dist-btn">Search by Distance</button>
                             </div> 
                         </div>
                     </div>
@@ -113,17 +123,20 @@ Coming soon
                 <!-- Search result containers -->
                 <div class="search-result-container columns">
 
-                    <!-- NEO Data table column -->
-                    <div class="column p-3 my-6 has-background-grey-lighter"> <!-- @note: change background color later -->
+                    <!-- ||| NEO Data table column ||| -->
+                    <div class="column p-3 my-6 start-top"> <!-- @note: change background color later -->
 
-                        <!-- Column header -->
+                        <!-- ||| Column header ||| -->
                         <div class="column-header">
                             <h2 class="title">NEO Data</h2>
                         </div>
 
                         <!-- Column content -->
-                        <div class="table-container">
-                            <table id="neo-table" class="table has-text-left">
+                        <!-- <div class="table-container"> -->
+                        <div class="neo-table-content fill-parent scroll-style">
+                            <table id="neo-table" class="table has-text-left scroll-style">
+
+                                <!-- NEO table head (Name, Distance, Date Observed) -->
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -132,50 +145,30 @@ Coming soon
                                     </tr>
                                 </thead>
 
+                                <!-- NEO table content -->
                                 <tbody id="neo-table-body" class="neo-table-body">
                                     <!-- ! generate these in main.js ! -->
-                                    <tr>
-                                        <td><a href="/">Big rock</a></td>
-                                        <td>1</td>
-                                        <td>38</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="/">Medium rock</a></td>
-                                        <td>1</td>
-                                        <td>38</td>
-                                    <tr>
-                                        <td><a href="/">Kinda small rock</a></td>
-                                        <td>1</td>
-                                        <td>38</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    <!-- Astronomy picture of the day column -->
-                    <div class="column p-3 my-6 ml-3 has-background-grey-lighter">
+                    <!-- ||| Astronomy picture of the day column ||| -->
+                    <div class="column p-3 my-6 start-top">
 
                         <!-- Column heading -->
                         <header class="column-header content">
                             <h2 class="title">Image of the Day</h2>
                             <div class="columns is-centered is-mobile px-6">
-                                <button class="button column is-half p-0 mx-2">See More Images/Facts</button>
-                                <button class="button column is-half p-0 mx-2">Reload Image of the Day</button>
+                                <button id="more-facts-btn" class="button column is-half is-info is-rounded p-0 mx-3"><a href="./image-loader.html">See More Images/Facts</a></button>
+                                <button id="new-apod-btn" class="button column is-half is-rounded p-0 mx-3">New Image of the Day</button>
                             </div>
                         </header>
 
                         <!-- Column content -->
-                        <div class = "container">
-                            <table class="table table is-bordered table is-fullwidth">
-                                <thead class = "table-dark">
-                                <tr>
-                                    <th scope="col">Images</th>
-                                </tr>
-                                </thead>
-                                <tbody id="table_body2">
-                                </tbody>
-                            </table>
+                        <div id="apod-container" class="apod-container fill-parent scroll-style">
+                            <img id="apod-img" src="" alt="">
+                            <p><i></i></p>
                         </div>
                     </div>
                 </div>
@@ -183,7 +176,7 @@ Coming soon
             <!-- End Main page body -->
             </main>
 
-            <footer class="p-4 pb-5 has-background-info">
+            <footer class="p-4 pb-5 mt-6 has-background-info">
                 <div class="footer-heading">
                     <h2 class="title is-3 has-text-primary-light">About Us</h2>
                 </div>
@@ -192,7 +185,7 @@ Coming soon
                     <div class="columns is-centered">
                         <div class="column is-half">
                             <a>Contact Us</a>
-                             | 
+                            | 
                             <a>Join Our Team!</a>
                         </div>
                     </div>
@@ -205,7 +198,7 @@ Coming soon
         <!-- BEGIN FRAMEWORK HERE <<END -->
         <!-- Load jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<!-- load main script -->
-		<script type="module" src="resources\workspace\js\main.js"></script>
-	</body>
+        <!-- load main script -->
+        <script type="module" src="resources\workspace\js\main.js"></script>
+    </body>
 </html>

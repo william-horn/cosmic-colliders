@@ -1,0 +1,86 @@
+
+*{
+    background-image: linear-gradient(180deg, #181b69, black);
+    color: white;
+    border: 2px solid black;
+    font-size: large;
+}
+body{
+    background-color: rgb(88, 88, 88);
+    
+}
+
+a {
+    display:flex;
+    justify-content: center;
+}
+
+a img{
+    width: 90%;
+    /* margin-left: 50px; */
+    border: 4px rgb(12, 0, 78) solid;
+    border-radius: 2%;
+}
+
+tr {
+    border-bottom: 2px solid whitesmoke;
+    
+}
+
+th {
+    background-color: grey;
+    color:rgb(255, 174, 0);
+}
+
+.loading-bar {
+    display: none;
+    position: relative;
+    width:50%;
+    height: 50px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    /* animation: trippy-rotation 4s linear infinite; */
+    background: rgb(11, 1, 73) !important;
+}
+
+.loading-bar > div {
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    background: rgb(255, 125, 4) !important;
+    /* animation: loading 3s linear infinite; */
+    display: flex;
+    justify-content: center;
+}
+
+.loading-bar-anim {
+    display: block;
+    animation: trippy-rotation 4s linear infinite,
+}
+
+.loading-bar-anim > div {
+    animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+    0% { left: -200px; }
+    100% { left: 100%; }
+}
+
+@keyframes trippy-rotation {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+
+@media screen and (min-width: 1000px) {
+    .loading-bar {
+        width: 30%;
+    }
+}
+
+p {
+    font-size: large;
+    
+}
