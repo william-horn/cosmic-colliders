@@ -166,11 +166,11 @@ export default async function getAPIRequest(source, options={}) {
     const response = await fetch(url)
     const responseData = await response.json();
 
-    console.log('raw data: ', responseData); // keep for debugging
+    // console.log('raw data: ', responseData); // keep for debugging
 
     if (options.formatted && api.format) {
         const formattedData = api.format(responseData);
-        console.log('formatted data: ', formattedData);
+        // console.log('formatted data: ', formattedData);
         return formattedData;
     }
 

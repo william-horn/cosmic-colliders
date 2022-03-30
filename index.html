@@ -62,7 +62,7 @@ Coming soon
         <link rel="stylesheet" href="./resources/workspace/css/main-style.css"/>
 	</head>
 	
-	<body class="">
+	<body background="resources\assets\imgs\space-galaxy-milky-way-110854.jpg" class="">
         <!-- BEGIN HTML FRAMEWORK HERE >>BEGIN -->
 
         <!-- All page content -->
@@ -101,6 +101,11 @@ Coming soon
                                     <!-- ! generate search result buttons in main.js ! -->
                                 </div>
                             </div>
+                            <div class="buttons are-medium is-centered pt-2">
+                                <button class="button is-info is-rounded" id="name-btn">Search by Name</button>
+                                <button class="button is-info is-rounded" id="year-btn">Search by Year</button>
+                                <button class="button is-info is-rounded" id="dist-btn">Search by Distance</button>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -117,33 +122,35 @@ Coming soon
                         </div>
 
                         <!-- Column content -->
-                        <table id="neo-table" class="table has-text-left">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Distance</th>
-                                    <th>Date Observed</th>
-                                </tr>
-                            </thead>
+                        <div class="table-container">
+                            <table id="neo-table" class="table has-text-left">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Distance</th>
+                                        <th>Date Observed</th>
+                                    </tr>
+                                </thead>
 
-                            <tbody id="neo-table-body" class="neo-table-body">
-                                <!-- ! generate these in main.js ! -->
-                                <tr>
-                                    <td><a href="/">Big rock</a></td>
-                                    <td>1</td>
-                                    <td>38</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="/">Medium rock</a></td>
-                                    <td>1</td>
-                                    <td>38</td>
-                                <tr>
-                                    <td><a href="/">Kinda small rock</a></td>
-                                    <td>1</td>
-                                    <td>38</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                <tbody id="neo-table-body" class="neo-table-body">
+                                    <!-- ! generate these in main.js ! -->
+                                    <tr>
+                                        <td><a href="/">Big rock</a></td>
+                                        <td>1</td>
+                                        <td>38</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="/">Medium rock</a></td>
+                                        <td>1</td>
+                                        <td>38</td>
+                                    <tr>
+                                        <td><a href="/">Kinda small rock</a></td>
+                                        <td>1</td>
+                                        <td>38</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <!-- Astronomy picture of the day column -->
@@ -151,18 +158,24 @@ Coming soon
 
                         <!-- Column heading -->
                         <header class="column-header content">
-                            <h2 class="title">Relevant Images</h2>
+                            <h2 class="title">Image of the Day</h2>
                             <div class="columns is-centered is-mobile px-6">
-                                <button class="button column is-half p-0 mx-2">Button 1</button>
-                                <button class="button column is-half p-0 mx-2">Button 2</button>
+                                <button class="button column is-half p-0 mx-2">See More Images/Facts</button>
+                                <button class="button column is-half p-0 mx-2">Reload Image of the Day</button>
                             </div>
                         </header>
 
                         <!-- Column content -->
-                        <div id="image-container" class="image-container">
-                            <img src="https://bulma.io/images/placeholders/256x256.png">
-                            <img src="https://bulma.io/images/placeholders/256x256.png">
-                            <img src="https://bulma.io/images/placeholders/256x256.png">
+                        <div class = "container">
+                            <table class="table table is-bordered table is-fullwidth">
+                                <thead class = "table-dark">
+                                <tr>
+                                    <th scope="col">Images</th>
+                                </tr>
+                                </thead>
+                                <tbody id="table_body2">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -193,6 +206,6 @@ Coming soon
         <!-- Load jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<!-- load main script -->
-		<script type="module" src="./resources/workspace/js/main.js"></script>
+		<script type="module" src="resources\workspace\js\main.js"></script>
 	</body>
 </html>

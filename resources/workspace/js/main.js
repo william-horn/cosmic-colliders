@@ -64,7 +64,6 @@ Coming soon
 
 ==================================================================================================================================
 */
-
 /* ---------------- */
 /* Import Libraries */
 /* ---------------- */
@@ -80,6 +79,11 @@ let neoTableBodyEl;
 let imageContainerEl;
 let neoSearchDropdownEl;
 let neoSearchDropdownContainerEl;
+let namebtnEl;
+let yearbtnEl;
+let distbtnEl;
+let img1El;
+
 
 /* ----------------------- */
 /* Internal Program States */
@@ -111,6 +115,9 @@ function loadUIReferences() {
     imageContainerEl = $('#image-container');
     neoSearchDropdownEl = $('#neo-search-dropdown');
     neoSearchDropdownContainerEl = $('#neo-search-history-container');
+    namebtnEl = $('#name-btn');
+    yearbtnEl = $('#year-btn');
+    distbtnEl = $('#dist-btn');
 }
 
 // generate data row from CAD API data
@@ -139,21 +146,40 @@ function generateNEORows(neoDataCollection) {
 
 // handle logic for user search
 function processSearchQuery(searchOptions) {
-
-
+    
     const NEODataPromise = getAPIRequest('cad', {
         useProxy: true,
         formatted: true,
         params: {
             'dist-max': '0.001',
-            'date-min': '2021-01-01',
-            'sort': 'dist',
+            'date-min': searchOptions.searchFilter === 'date' ? searchOptions.query + '-01-01' : '2021-08-19',
+            'sort': searchOptions.searchFilter,
             'body': 'Earth',
         }
     });
 
     NEODataPromise.then(dataCollection => generateNEORows(dataCollection));
+    const imagePromise = getAPIRequest('apod', {useApiKey:true , params : {count:1}})
+    imagePromise.then(imageCollect => {
+        let tableData2=""
+        imageCollect.map((singleImage)=>{
+            tableData2+=`<tr>
+            <td><a href="${singleImage.url}"><img src="${singleImage.url}"/></a></td>
+            </tr>`
+            
+        })
+            $("#table_body2").html(tableData2);
+    })
+}
 
+//Button 1.click (connect to onSearchButtonPressed function) * Do for button 2 and 3 as well.
+function onSearchButtonPressed(searchFilter){
+    processSearchQuery({
+        query: $(neoSearchFieldEl).val(),
+        saveHistory: true,
+        searchFilter: searchFilter,
+    })
+    console.log(searchFilter)
 }
 
 // save recent search result to local storage
@@ -204,7 +230,8 @@ function onSearchBarEnter(event) {
     // call the search query function to begin processing search request
     processSearchQuery({
         query: $(neoSearchFieldEl).val(),
-        saveHistory: true
+        saveHistory: true,
+        searchFilter: "name/date/dist" //<---PLACEHOLDER VALUES FOR 3 TYPES OF STRINGS TO BE PASSED
     });
 }
 
@@ -232,6 +259,9 @@ function init() {
     $(neoSearchFieldEl).focusout(onSearchFocusLost);
     $(neoSearchFieldEl).focus(onSearchFocus);
     $(neoSearchFieldEl).keyup(onSearchBarEnter);
+    $(namebtnEl).click( () => onSearchButtonPressed('name') )
+    $(yearbtnEl).click( () => onSearchButtonPressed('date') )
+    $(distbtnEl).click( () => onSearchButtonPressed('dist') )
 }
 
 /* -------------------------- */
@@ -239,3 +269,4 @@ function init() {
 /* -------------------------- */
 // Run program 'init' function when the document is ready
 $(document).ready(init);
+
