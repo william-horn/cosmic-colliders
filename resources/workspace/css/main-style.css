@@ -108,6 +108,13 @@ tbody tr:nth-child(2n+1) td {
     height: 100vh;
 }
 
+.has-background-info {
+    background-color: #2b455b !important;
+}
+
+.is-info {
+    background-color: #335776 !important;
+}
 
 /* ------------------ */
 /* Main Header Styles */
@@ -203,6 +210,7 @@ tbody tr:nth-child(2n+1) td {
 }
 
 .scroll-style {
+    padding-right: 5px;
     overflow-y: auto;
 }
 

@@ -146,6 +146,14 @@ function cancelSearchLoadingAnim() {
     $(neoSearchFieldParentEl).removeClass('is-loading');
 }
 
+function generalSearchAlgorithm() {
+
+}
+
+function fromKMtoAU(km) {
+    return km/149597870.691;
+}
+
 // handle logic for user search
 function processSearchQuery(searchOptions) {
 
@@ -155,25 +163,78 @@ function processSearchQuery(searchOptions) {
         // searchFilter: [string] 'name'/'dist'/'date' (how to sort search results)
     // }
     
-    // todo: add search algorithm (include search filters)
+    // todo: add search algorithm (include search filters) --NOT DONE
     // todo: finish styling page --DONE
-    // todo: touch up search dropdown bar
+    // todo: touch up search dropdown bar --DONE
+
+    // get reference to search query text
+    const searchQuery = searchOptions.query.trim();
+    const filter = searchOptions.searchFilter || 'all';
+
+    // exit if search query is empty string
+    if (searchQuery === '') return;
+
     // start responsive loading animations
     startSearchLoadingAnim();
 
-    // make CAD request for relevant search data
-    const NEODataPromise = getAPIRequest('cad', {
+    // make API call to CAD
+    const cadRequestOptions = {
         useProxy: true,
         formatted: true,
         params: {
             'dist-max': '0.001',
-            'date-min': searchOptions.searchFilter === 'date' ? searchOptions.query + '-01-01' : '2021-08-19',
-            'sort': searchOptions.searchFilter,
+            'date-min': '2013-08-19',
             'body': 'Earth',
         }
+    }
+
+    if (filter === 'date') {
+        cadRequestOptions.params.sort = filter;
+        cadRequestOptions.params['date-min'] = searchQuery + '-01-01';
+    } else if (filter === 'dist') {
+        const numDist = parseInt(searchQuery.replaceAll(',', ''));
+        if (numDist) {
+            cadRequestOptions.params['dist-max'] = fromKMtoAU(numDist).toString();
+        }
+        cadRequestOptions.params.sort = filter;
+    }
+
+    // make CAD request for relevant search data
+    const NEODataPromise = getAPIRequest('cad', cadRequestOptions);
+    NEODataPromise.then(neoData => {
+        
+        const sortedData = [];
+
+        // if search filter option is provided, add search to history
+        if (filter === 'all') {
+            for (let i = 0; i < neoData.length; i++) {
+                const chunk = neoData[i];
+                const nameToMatch = chunk.name.toString().toLowerCase() + chunk.date.toString().toLowerCase() + chunk.dist.toString().toLowerCase();
+
+                if (nameToMatch.match(searchQuery)) {
+                    sortedData.push(chunk);
+                }
+            }
+        } else if (filter === 'name') {
+            for (let i = 0; i < neoData.length; i++) {
+                const chunk = neoData[i];
+                const nameToMatch = chunk.name.toString().toLowerCase();
+
+                if (nameToMatch.match(searchQuery)) {
+                    sortedData.push(chunk);
+                }
+            }
+        }
+
+        generateNEORows(sortedData.length === 0 ? neoData : sortedData);
     });
 
-    NEODataPromise.then(generateNEORows);
+    // save search query to local storage history if it has permission
+    if (searchOptions.saveHistory) {
+        addSearchQueryToHistory({
+            id: searchOptions.query
+        });
+    }
 }
 
 //Button 1.click (connect to onSearchButtonPressed function) * Do for button 2 and 3 as well.
@@ -225,25 +286,30 @@ function loadNEOSearchHistory() {
 /* Event Callback Functions */
 /* ------------------------ */
 
+function onSearchOptionPressed(event) {
+    const target = event.target;
+    console.log(target);
+
+    if ($(target).hasClass('button')) {
+        $(neoSearchFieldEl).val($(target).text());
+    }
+}
+
 // callback for when a user presses enter on the search bar
 function onSearchBarEnter(event) {
     if (event.keyCode != 13) return; // if the user presses enter, continue
+    const searchQuery = $(neoSearchFieldEl).val();
 
     // unfocus the search field
     $(neoSearchFieldEl).blur();
 
     // call the search query function to begin processing search request
-    processSearchQuery({
-        query: $(neoSearchFieldEl).val(),
-        saveHistory: true,
-        searchFilter: "name/date/dist" //<---PLACEHOLDER VALUES FOR 3 TYPES OF STRINGS TO BE PASSED
-    });
+    onSearchButtonPressed('all');
 }
 
 // when the user clicks on the search bar
 function onSearchFocus(event) {
     $(neoSearchDropdownEl).show();
-    $(neoSearchFieldEl).val('');
     loadNEOSearchHistory();
 }
 
@@ -266,6 +332,7 @@ function init() {
     $(neoSearchFieldEl).focusout(onSearchFocusLost);
     $(neoSearchFieldEl).focus(onSearchFocus);
     $(neoSearchFieldEl).keyup(onSearchBarEnter);
+    $(neoSearchDropdownContainerEl).on("mousedown", onSearchOptionPressed);
     $(newApodBtn).click(generateAPODImage);
     $(namebtnEl).click( () => onSearchButtonPressed('name') )
     $(yearbtnEl).click( () => onSearchButtonPressed('date') )
