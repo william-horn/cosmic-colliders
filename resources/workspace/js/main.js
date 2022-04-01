@@ -188,46 +188,10 @@ function processSearchQuery(searchOptions) {
         }
     }
 
-    if (filter === 'date') {
-        cadRequestOptions.params.sort = filter;
-        cadRequestOptions.params['date-min'] = searchQuery + '-01-01';
-    } else if (filter === 'dist') {
-        const numDist = parseInt(searchQuery.replaceAll(',', ''));
-        if (numDist) {
-            cadRequestOptions.params['dist-max'] = fromKMtoAU(numDist).toString();
-        }
-        cadRequestOptions.params.sort = filter;
-    }
-
     // make CAD request for relevant search data
     const NEODataPromise = getAPIRequest('cad', cadRequestOptions);
     NEODataPromise.then(neoData => {
         
-        const sortedData = [];
-
-        // if search filter option is provided, add search to history
-        if (filter === 'all') {
-            for (let i = 0; i < neoData.length; i++) {
-                const chunk = neoData[i];
-                const nameToMatch = chunk.name.toString().toLowerCase() + chunk.date.toString().toLowerCase() + chunk.dist.toString().toLowerCase();
-
-                if (nameToMatch.match(searchQuery.toLowerCase())) {
-                    sortedData.push(chunk);
-                }
-            }
-        } else if (filter === 'name') {
-            for (let i = 0; i < neoData.length; i++) {
-                const chunk = neoData[i];
-                const nameToMatch = chunk.name.toString().toLowerCase();
-
-                console.log(nameToMatch, ' => ', searchQuery);
-
-                if (nameToMatch.match(searchQuery.toLowerCase())) {
-                    sortedData.push(chunk);
-                }
-            }
-        }
-
         generateNEORows(sortedData.length === 0 ? neoData : sortedData);
     });
 
