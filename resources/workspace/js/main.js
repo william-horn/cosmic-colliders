@@ -289,7 +289,7 @@ function processSearchQuery(searchOptions) {
             sendInvalidSearchError('Year must be between 1990 and now');
             return;
         }
-        cadRequestOptions.params['date-min'] = `${searchQuery}-01-01`;
+        cadRequestOptions.params['date-min'] = `${updateFilter.toString()}-01-01`;
         cadRequestOptions.params.sort = 'date';
     }
 
