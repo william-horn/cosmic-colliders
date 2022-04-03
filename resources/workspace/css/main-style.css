@@ -146,6 +146,16 @@ tbody tr:nth-child(2n+1) td {
     flex-direction: column;
 }
 
+.filter-btn-pressed {
+    background-color: #ad6c23 !important;
+    color: white !important;
+}
+
+.error-message.error-message {
+    background-color: #895252 !important;
+    color: white !important;
+}
+
 /* ------------------- */
 /* Main Section Styles */
 /* ------------------- */
@@ -155,9 +165,10 @@ tbody tr:nth-child(2n+1) td {
 }
 
 #new-apod-btn {
-    background-color: #ffa500;
+    /* background-color: #ffa500; */
+    background-color: #060a10;
     color: white;
-    border-color: #ffa500 !important;
+    border-color: #ad6c23 !important;
 }
 
 #apod-img {
@@ -166,6 +177,12 @@ tbody tr:nth-child(2n+1) td {
 
 .neo-search-field {
     border-radius: 20px;
+    background-color: #070a0f !important;
+    color: white;
+}
+
+.neo-search-field::placeholder {
+    color: white;
 }
 
 .neo-search-history-container {

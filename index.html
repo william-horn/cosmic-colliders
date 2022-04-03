@@ -12,8 +12,8 @@
 
 ? @document-name:           index.html
 ? @document-created:        03/22/2022
-? @document-modified:       03/22/2022
-? @document-version:        v1.0.0
+? @document-modified:       04/02/2022
+? @document-version:        v1.1.0
 
 ==================================================================================================================================
 
@@ -22,32 +22,56 @@
 | ABOUT DOCUMENT |
 ==================================================================================================================================
 
-Coming soon
+----------------------------
+Welcome to Cosmic Colliders!
+----------------------------
+
+This interactive web application allows our stargazed users to search for Near-Earth Objects (NEOs) by year, distance
+away from Earth (in KM), and by name. This enables anyone who is studying such objects to easily filter out the NEO
+or group of NEOs that they're interested in, along with being a fun-fact app for casual connoisseurs of the cosmos!
+
+This was a team-effort project brought to you by the following collaborators and their roles:
+
+    *- James Primitive (Christopher J. Hoke)
+        ? Programmer (Javascript), Troubleshooter, API wizard
+
+    *- Amy Nikitas
+        ? Designer, HTML/CSS Developer, Color Artist
+    
+    *- Gabrielle Befort
+        ? Designer, HTML/CSS Developer, Bulma Implementor
+
+    *- William J. Horn
+        ? Programmer (Javascript), Troubleshooter, UI Integration
 
 ==================================================================================================================================
 
-? @document-todo
+? @document-board
 =================
-| DOCUMENT TODO |
+| DOCUMENT BOARD |
 ==================================================================================================================================
 
+    todo: develop page footer --DONE
+    todo: improve page footer to include active links that direct user to additional information sites/forms --NOT DONE
+    !bug: fix issue with 'See More Image/Facts' button not working sometimes --FIXED
+
 ==================================================================================================================================
- -->
+-->
 
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
     <head>
-        <!-- ** Title ** -->
-        <title>Cosmic Colliders</title>
-
         <!-- ** Metadata ** -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <meta content="ie=edge"/>
         <meta name="author" content="Cosmic Colliders Team"/>
         <meta name="description" content="Observe the potential dangers of space"/>
+
+        <!-- ** Title ** -->
+        <title>Cosmic Colliders</title>
 
         <!-- ** CSS Third Party ** -->
         <!-- random starter font apis -->
@@ -86,7 +110,7 @@ Coming soon
                             This application allows you to search 
                             through our cosmic neighborhood for interesting near-Earth objects (NEO for short). Our dynamic search algorithm
                             enables you to enter what you would like to search, and filter that search by clicking one of the three search filter
-                            buttons below the search bar.
+                            buttons below the search bar. Press enter to make the search request, or click the search filter buttons below a second time!
                         </p>
                     </div>
                 </div>
@@ -111,7 +135,7 @@ Coming soon
                             </div>
 
                             <!-- Search filter buttons -->
-                            <div class="buttons is-small is-centered mt-5">
+                            <div id="search-filter-btns" class="buttons is-small is-centered mt-5">
                                 <button class="button is-info is-rounded mx-3" id="name-btn">Search by Name</button>
                                 <button class="button is-info is-rounded mx-3" id="year-btn">Search by Year</button>
                                 <button class="button is-info is-rounded mx-3" id="dist-btn">Search by Distance (KM)</button>
@@ -160,9 +184,14 @@ Coming soon
                         <header class="column-header content">
                             <h2 class="title">Image of the Day</h2>
                             <div class="columns is-centered is-mobile px-6">
-                                <button id="more-facts-btn" class="button column is-half is-info is-rounded p-0 mx-3">
-                                    <a href="./image-loader.html">See More Images/Facts</a>
-                                </button>
+                                <!-- take user to internal image-loader.html -->
+                                <input 
+                                    id="more-facts-btn"
+                                    class="button column is-half is-info is-rounded p-0" 
+                                    type="button" 
+                                    onclick="location.href='./image-loader.html'" 
+                                    value="See More Images/Facts"
+                                />
                                 <button id="new-apod-btn" class="button column is-half is-rounded p-0 mx-3">New Image of the Day</button>
                             </div>
                         </header>

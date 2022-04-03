@@ -5,10 +5,9 @@
 ==================================================================================================================================
 
 ? @author:                 William J. Horn
-? @document-name:          main.js
+? @document-name:          api.js
 ? @document-created:       03/28/2022
 ? @document-modified:      03/28/2022
-? @document-version:       v1.0.0
 
 ==================================================================================================================================
 
@@ -77,6 +76,8 @@ function formatCADFields(rawData) {
     const datalist = [];
     const fields = rawData.fields;
     const data = rawData.data;
+
+    if (!data) return [];
 
     // iterate over the entire data object returned by the request
     for (let i = 0; i < data.length; i++) {

@@ -1,6 +1,3 @@
-const searchSettings = {
-    
-}
 
 const nasaAPI = {
     closestObjects: "https://ssd-api.jpl.nasa.gov/cad.api?dist-max=10LD&date-min=2018-01-01&sort=dist",
